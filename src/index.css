@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+.cl-avatarBox{
+    width: 48px;
+    height: 48px;
+}
