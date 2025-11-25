@@ -8,6 +8,7 @@ import Cart from './pages/Cart'
 import Navbar from './components/Navbar'
 import axios from 'axios'
 import Category from './components/Category'
+import Footer from './components/Footer'
 
 
 
@@ -50,6 +51,7 @@ const App = () => {
      <Route path='/contact' element={<Contact/>}/>
      <Route path='/cart' element={<Cart/>}/>
     </Routes>
+    <Footer/>
 
     </BrowserRouter>
   )
