@@ -7,6 +7,8 @@ import Contact from './pages/Contact'
 import Cart from './pages/Cart'
 import Navbar from './components/Navbar'
 import axios from 'axios'
+import Category from './components/Category'
+
 
 
 const App = () => {
@@ -25,7 +27,7 @@ const App = () => {
         setLocation(exactLocation)
         setOpenDropDown(false)
 
-        console.log(exactLocation);
+        // console.log(exactLocation);
         
       } catch (error) {
         
@@ -39,6 +41,8 @@ const App = () => {
   return (
     <BrowserRouter>
     <Navbar location={location} openDropDown={openDropDown} toggleDropdown={toggleDropdown} getLocation={getLocation}/>
+   
+   
     <Routes>
      <Route path='/' element={<Home/>}/>
      <Route path='/products' element={<Products/>}/>
