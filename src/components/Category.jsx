@@ -5,19 +5,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const Category = () => {
-    const{data,fetchAllProducts}=getData()
-      const getUniqueCategory=(data,property) =>{
-        let newVal=data?.map((curElem)=>{
-           return curElem[property]
-        })
-        newVal= [...new Set(newVal)]
-        return newVal;
-        }
-          const categoryOnlyData=getUniqueCategory(data,'category')
-          console.log(categoryOnlyData);
-          useEffect(()=>{
-                fetchAllProducts();
-          },[])
+    const{categoryOnlyData}=getData()
+     
+        
 
           function SampleNextArrow(props) {
     const { className, style, onClick } = props;
