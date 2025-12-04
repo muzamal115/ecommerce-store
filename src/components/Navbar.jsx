@@ -6,8 +6,12 @@ import { CgClose } from 'react-icons/cg'
 import { FaCaretDown } from 'react-icons/fa'
 import { IoCartOutline } from 'react-icons/io5'
 import { Link, NavLink } from 'react-router-dom'
+import { useCart } from '../context/CartContext'
+
 
 const Navbar = ({location,openDropDown,toggleDropdown,getLocation}) => {
+   
+    const{cartItem}=useCart()
   
   
   return (
@@ -51,7 +55,7 @@ const Navbar = ({location,openDropDown,toggleDropdown,getLocation}) => {
           <IoCartOutline  className='w-7 h-7 '/>
             
           
-          <span className='absolute px-2 -top-3 left-3 bg-red-500 rounded-full text-white'>0</span>
+          <span className='absolute px-2 -top-3 left-3 bg-red-500 rounded-full text-white'>{cartItem.length}</span>
           
           </Link>
           <div>
