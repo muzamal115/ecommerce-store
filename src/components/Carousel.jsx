@@ -70,6 +70,7 @@ const Carousel = () => {
 
   useEffect(() => {
     fetchAllProducts();
+    window.scrollTo(0,0);
   }, []);
 
   const settings = {

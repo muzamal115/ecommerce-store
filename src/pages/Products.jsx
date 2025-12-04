@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getData } from '../context/DataContext'
 import FilterSection from '../components/FilterSection'
 import Loading from '../assets/Loading4.webm'
@@ -9,12 +9,17 @@ import notfound from '../assets/notfound.json'
 
 
 const Products = () => {
-    const{data}= getData()
+    const{data,fetchAllProducts}= getData()
     const[search,setSearch]=useState("")
     const[category,setCategory]=useState("All")
     const[brand,setBrand]=useState("All")
     const[priceRange,setPriceRange]=useState([0,5000])
     const[page,setPage]=useState(1)
+     useEffect(() => {
+       
+        window.scrollTo(0,0);
+      }, []);
+      
 
     const handleCategoryChange=(e)=>{
       setCategory(e.target.value)
