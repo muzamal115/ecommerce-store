@@ -56,7 +56,7 @@ const Cart = ({location,getLocation}) => {
               <h1 className='text-gray-800 font-bold text-xl'>Delievery Info</h1>
               <div className="flex flex-col space-y-1">
                 <label htmlFor="">Full Name</label>
-                <input type="text" value={user.fullName}
+                <input type="text" value={user?.fullName}
                  placeholder='Enter your name' className='p-2 rounded-md' />
               </div>
 
@@ -68,11 +68,11 @@ const Cart = ({location,getLocation}) => {
               <div className="flex w-full gap-5">
                 <div className="flex flex-col space-y-1 w-full">
                   <label htmlFor="">State</label>
-                  <input type="text" placeholder='Enter your state' value={location.state} className='w-full p-2 rounded-md' />
+                  <input type="text" placeholder='Enter your state' value={location?.state} className='w-full p-2 rounded-md' />
                 </div>
                <div className="flex flex-col space-y-1 w-full">
                   <label htmlFor="">PostCode</label>
-                  <input type="text" value={location.postcode} placeholder='Enter your postcode' className='w-full p-2 rounded-md' />
+                  <input type="text" value={location?.postcode} placeholder='Enter your postcode' className='w-full p-2 rounded-md' />
                 </div>
 
               </div>

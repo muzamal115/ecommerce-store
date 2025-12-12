@@ -3,11 +3,20 @@ import { getData } from '../context/DataContext'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useNavigate } from 'react-router-dom';
 
 const Category = () => {
-    const{categoryOnlyData}=getData()
-     
-        
+    // const{categoryOnlyData}=getData()
+     const navigate=useNavigate()
+        const{data}=getData()
+        const getUniqueCategory=(data,property) =>{
+          let newVal=data?.map((curElem)=>{
+             return curElem[property]
+          })
+          newVal= [...new Set(newVal)]
+          return newVal;
+          }
+            const categoryOnlyData=getUniqueCategory(data,'category')
 
           function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -85,7 +94,7 @@ const Category = () => {
     <Slider {...settings}>
       {categoryOnlyData.map((item, index) => (
         <div key={index} className="px-3 whitespace-nowrap ">
-          <button className='uppercase bg-gradient-to-r from-red-500 to-purple-500 text-white px-3 py-1 rounded-md cursor-pointer'>
+          <button onClick={()=>navigate(`/category/${item}`)} className='uppercase bg-gradient-to-r from-red-500 to-purple-500 text-white px-3 py-1 rounded-md cursor-pointer'>
             {item}
           </button>
         </div>
