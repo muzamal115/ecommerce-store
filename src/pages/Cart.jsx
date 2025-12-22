@@ -16,7 +16,7 @@ const Cart = ({location,getLocation}) => {
      const{cartItem,updateQuantity,deleteItem}=  useCart()
      const totalPrice = Math.round(cartItem.reduce((total, item) => total + item.price, 0));
   return (
-    <div className='mt-10 max-w-6xl mx-auto mb-5'>
+    <div className='mt-10 max-w-6xl mx-auto mb-5 md:px-0 px-4'>
     {
        cartItem.length>0?<div>
         <h1 className='font-bold text-2xl'>MY Cart {cartItem.length}</h1>
@@ -26,14 +26,14 @@ const Cart = ({location,getLocation}) => {
             cartItem.map((item,index)=>{
               return(
                 <div key={index}className='bg-gray-100 p-5 rounded-md flex items-center  justify-between mt-3 '>
-                  <div className='flex items-center gap-4 '>
-                    <img src={item.thumbnail} alt={item.title} className='w-20 h-20 rounded-md' />
+                  <div className='flex items-center md:gap-4  '>
+                    <img src={item.thumbnail} alt={item.title} className='md:w-20  w-15 md:h-20 rounded-md' />
                     <div>
-                      <h1 className='w-[300px] line-clamp-2'>{item.title}</h1>
+                      <h1 className='md:w-[300px] line-clamp-2'>{item.title}</h1>
                       <p className='text-red-500 font-semibold text-lg'>${item.price}</p>
                     </div>
                   </div>
-                  <div className="bg-red-500 text-white flex gap-4 p-2 rounded-md font-bold text-xl">
+                  <div className="bg-red-500 text-white flex ml-2 md:ml-0 gap-4 p-2 rounded-md font-bold text-xl">
                     <button className='cursor-pointer' onClick={()=>updateQuantity(item.id,'decrease')} >-</button>
                     <span>{item.quantity}</span>
                     <button className='cursor-pointer' onClick={()=>updateQuantity(item.id,'increase')}  >+</button>
@@ -51,7 +51,7 @@ const Cart = ({location,getLocation}) => {
           }
 
           </div>
-          <div className='grid grid-cols-2 gap-20'>
+          <div className='grid grid-cols-1 md:grid-cols-2 md:gap-20'>
             <div className='bg-gray-100 rounded-md p-7 mt-4 space-y-2'>
               <h1 className='text-gray-800 font-bold text-xl'>Delievery Info</h1>
               <div className="flex flex-col space-y-1">

@@ -94,13 +94,13 @@ const Carousel = () => {
             key={index}
             className="bg-gradient-to-r from-[#060c29] via-[#302b63] to-[#24243e] z-0"
           >
-            <div className="flex gap-10 justify-center h-[600px] items-center px-4">
-              <div className="space-y-6">
+            <div className="flex flex-col md:flex-row gap-10 justify-center  md:justify-around h-[600px] items-center px-4  my-20 md:my-0">
+              <div className="md:space-y-6 space-y-3 ">
                 <h3 className="text-red-500 font-semibold font-sans text-sm">
                   Powering Your World with the best in Shopping
                 </h3>
 
-                <h1 className="text-4xl font-bold uppercase line-clamp-3 md:w-[500px] text-white">
+                <h1 className="md:text-4xl text-xl font-bold uppercase line-clamp-3 md:w-[500px] text-white">
                   {item.title}
                 </h1>
 
