@@ -81,6 +81,8 @@ const dynamicPage=Math.ceil(filteredData?.length/12)
       filteredData?.length>0?(
          <div className='flex flex-col w-full'>
 
+          {/*All Products Data */}
+
       <div className='grid md:grid-cols-4 grid-cols-2 gap-2 md:gap-7 mt-10'>
         {filteredData
           ?.slice(page * 12 - 12, page * 12)
