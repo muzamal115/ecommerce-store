@@ -17,6 +17,10 @@ const Products = () => {
     const[priceRange,setPriceRange]=useState([0,5000])
     const[page,setPage]=useState(1)
     const[openFilter,setOpenFilter]=useState(false)
+    useEffect(()=>{
+   fetchAllProducts()
+    },[])
+   
      
     useEffect(() => {
         window.scrollTo(0,0);

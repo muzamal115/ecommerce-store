@@ -1,5 +1,7 @@
 import React from 'react'
 import { Truck, Lock, RotateCcw, Clock } from 'lucide-react'
+import { constant } from 'firebase/firestore/pipelines'
+import { getData } from '../context/DataContext'
 
 const features = [
     {icon: Truck, text: 'Free Shipping', subtext: 'On orders over $100'},
@@ -8,7 +10,15 @@ const features = [
     {icon: Clock, text: '24/7 Support', subtext: 'Dedicated customer service'},
 ]
 
+
 const Features = () => {
+
+    const{uploadProductsToFirestore}=getData()
+
+const addData=()=>{
+    uploadProductsToFirestore()
+
+}
   return (
     <div className='bg-gray-100 py-8 px-4 sm:px-6 lg:px-8 '>
         <div className=" max-w-7xl mx-auto  ">
@@ -25,9 +35,15 @@ const Features = () => {
                         </div>
                     })
                 }
+               
 
             </div>
+           
         </div>
+        {/* <div className='w-full text-center mt-2'>
+              <button className=' bg-gradient-to-r from-red-500 to-purple-500 text-white px-3 py-2 rounded-md cursor-pointer mt-2' onClick={addData}>Add Data</button>
+        </div> */}
+        
 
     </div>
   )

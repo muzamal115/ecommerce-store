@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useCart } from '../context/CartContext'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { LuNotebook, LuNotebookText } from 'react-icons/lu'
@@ -11,10 +11,12 @@ import emptyCart from '../assets/empty-cart.png'
 const Cart = ({location,getLocation}) => {
     const{user}=useUser()
     const navigate=useNavigate()
+    const [userName,setUserName]=useState(user?.fullName)
+    
    
     
      const{cartItem,updateQuantity,deleteItem}=  useCart()
-     const totalPrice = Math.round(cartItem.reduce((total, item) => total + item.price, 0));
+     const totalPrice = Math.round(cartItem.reduce((total, item) => total + (item.price*item.quantity)+270, 0));
   return (
     <div className='mt-10 max-w-6xl mx-auto mb-5 md:px-0 px-4'>
     {
@@ -27,10 +29,10 @@ const Cart = ({location,getLocation}) => {
               return(
                 <div key={index}className='bg-gray-100 p-5 rounded-md flex items-center  justify-between mt-3 '>
                   <div className='flex items-center md:gap-4  '>
-                    <img src={item.thumbnail} alt={item.title} className='md:w-20  w-15 md:h-20 rounded-md' />
+                    <img src={item.image} alt={item.title} className='md:w-20  w-15 md:h-20 rounded-md' />
                     <div>
                       <h1 className='md:w-[300px] line-clamp-2'>{item.title}</h1>
-                      <p className='text-red-500 font-semibold text-lg'>${item.price}</p>
+                      <p className='text-red-500 font-semibold text-lg'>Rs.{(item.price*item.quantity)+270}</p>
                     </div>
                   </div>
                   <div className="bg-red-500 text-white flex ml-2 md:ml-0 gap-4 p-2 rounded-md font-bold text-xl">
@@ -56,7 +58,7 @@ const Cart = ({location,getLocation}) => {
               <h1 className='text-gray-800 font-bold text-xl'>Delievery Info</h1>
               <div className="flex flex-col space-y-1">
                 <label htmlFor="">Full Name</label>
-                <input type="text" value={user?.fullName}
+                <input type="text" value={userName} onChange={(e)=>setUserName(e.target.value)}
                  placeholder='Enter your name' className='p-2 rounded-md' />
               </div>
 
@@ -101,13 +103,13 @@ const Cart = ({location,getLocation}) => {
               <h1 className="text-gray-800 font-bold text-xl">Bill details</h1>
               <div className="flex justify-between items-center">
                 <h1 className='flex gap-1 items-center text-gray-700'><span><LuNotebookText/></span>Items total</h1>
-                <p>${totalPrice}</p>
+                <p>Rs. {totalPrice}</p>
                 
               </div>
 
               <div className="flex justify-between items-center">
-                <h1 className='flex gap-1 items-center text-gray-700'><span><MdDeliveryDining/></span>Items total</h1>
-                <p className='text-red-500 font-semibold'><span className='text-gray-600 line-through'>$25</span> FREE</p>
+                <h1 className='flex gap-1 items-center text-gray-700'><span><MdDeliveryDining/></span>Delivery Charge</h1>
+                <p className='text-red-500 font-semibold'><span className='text-gray-600 line-through'>Rs. 200</span> FREE</p>
                 
               </div>
 
@@ -118,8 +120,8 @@ const Cart = ({location,getLocation}) => {
               </div>
               <hr  className='text-gray-200 mt-2'/>
                <div className="flex justify-between items-center">
-                <h1 className='font-semibold text-lg'>Handing Charge</h1>
-                <p className='text-lg font-semibold'> ${totalPrice+5}</p>
+                <h1 className='font-semibold text-lg'>Total</h1>
+                <p className='text-lg font-semibold'> Rs. {totalPrice+5}</p>
                 
               </div>
               <div>
