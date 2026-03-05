@@ -16,7 +16,7 @@ const Cart = ({location,getLocation}) => {
    
     
      const{cartItem,updateQuantity,deleteItem}=  useCart()
-     const totalPrice = Math.round(cartItem.reduce((total, item) => total + (item.price*item.quantity)+270, 0));
+     const totalPrice = Math.round(cartItem.reduce((total, item) => total + (item.price*item.quantity), 0));
   return (
     <div className='mt-10 max-w-6xl mx-auto mb-5 md:px-0 px-4'>
     {
@@ -32,7 +32,7 @@ const Cart = ({location,getLocation}) => {
                     <img src={item.image} alt={item.title} className='md:w-20  w-15 md:h-20 rounded-md' />
                     <div>
                       <h1 className='md:w-[300px] line-clamp-2'>{item.title}</h1>
-                      <p className='text-red-500 font-semibold text-lg'>Rs.{(item.price*item.quantity)+270}</p>
+                      <p className='text-red-500 font-semibold text-lg'>Rs.{item.price*item.quantity}</p>
                     </div>
                   </div>
                   <div className="bg-red-500 text-white flex ml-2 md:ml-0 gap-4 p-2 rounded-md font-bold text-xl">
@@ -115,13 +115,13 @@ const Cart = ({location,getLocation}) => {
 
                <div className="flex justify-between items-center">
                 <h1 className='flex gap-1 items-center text-gray-700'><span><GiShoppingBag/></span>Handing Charge</h1>
-                <p className='text-red-500 font-semibold'> $5</p>
+                <p className='text-red-500 font-semibold'> Rs. 100</p>
                 
               </div>
               <hr  className='text-gray-200 mt-2'/>
                <div className="flex justify-between items-center">
                 <h1 className='font-semibold text-lg'>Total</h1>
-                <p className='text-lg font-semibold'> Rs. {totalPrice+5}</p>
+                <p className='text-lg font-semibold'> Rs. {totalPrice+100}</p>
                 
               </div>
               <div>

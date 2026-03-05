@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
 import { initializeApp } from "firebase/app";
-import { collection,addDoc, getFirestore ,getDocs,getDoc,doc} from "firebase/firestore";
+import { collection,addDoc, getFirestore ,getDocs,getDoc,doc, updateDoc} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyASEuOda6uoxGBCD_lXJFUFOdpZeloHp2M",
@@ -94,7 +94,7 @@ export const DataProvider = ({ children }) => {
       
     )  
   );
-       console.log(allData);
+      //  console.log(allData);
        setData(allData)
        
        
@@ -111,6 +111,23 @@ export const DataProvider = ({ children }) => {
       return result
   }
 
+  const updatePrices=async()=>{
+    const snapshot=await getDocs(collection(firestore,'products'))
+    const updates=snapshot.docs.map((item)=>{
+      const data=item.data()
+      const newPrice=Math.round(Number(data.price)*50);
+      const docRef=doc(firestore,"products",item.id)
+      return updateDoc(docRef,{
+        price:newPrice
+      })
+
+
+    })
+     await Promise.all(updates);
+    console.log('Data Updated successfully');
+    
+  }
+
   return (
     <DataContext.Provider value={{ data,
      setData, 
@@ -118,7 +135,8 @@ export const DataProvider = ({ children }) => {
      categoryOnlyData,
      brandOnlyData,
      uploadProductsToFirestore,
-     getSingleProduct
+     getSingleProduct,
+     updatePrices,
       }}>
       {children}
     </DataContext.Provider>

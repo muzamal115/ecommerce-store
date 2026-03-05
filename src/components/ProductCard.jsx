@@ -7,7 +7,7 @@ import { useUser } from '@clerk/clerk-react'
 const ProductCard = ({product}) => {
     // console.log(product);
     const{user}=useUser()
-    console.log(user);
+    // console.log(user);
     
 
     
@@ -32,7 +32,7 @@ return (
       </h1>
 
       <p className='text-lg text-gray-800 font-bold mt-auto'>
-        Rs. {product.price+270}
+        Rs. {product.price}
       </p>
       {user ? (
    <button onClick={() => addToCart(product)} className='bg-red-500 md:px-3 px-1 py-2 mt-2 text-lg rounded-md text-white w-full flex gap-1 md:gap-2 justify-center items-center font-semibold'>Add to Cart</button>
