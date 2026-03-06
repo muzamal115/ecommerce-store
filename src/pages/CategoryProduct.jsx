@@ -4,25 +4,34 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../assets/Loading4.webm'
 import { ChevronLeft } from 'lucide-react'
 import ProductListView from '../components/ProductListView'
+import { getData } from '../context/DataContext'
 
 const CategoryProduct = () => {
   const{category}  =useParams()
   const[searchData,setSearchData]=useState([])
     const navigate=useNavigate()
-const filterData=async()=>{
+    const{fetchProductsByCategory}=getData()
+// const filterData=async()=>{
 
-    try {
-     const res=   await axios.get(`https://dummyjson.com/products/category/${category}`)
-     console.log(res.data.products);
-     const data=res.data.products
-     setSearchData(data)
+//     try {
+//      const res=   await axios.get(`https://dummyjson.com/products/category/${category}`)
+//      console.log(res.data.products);
+//      const data=res.data.products
+//      setSearchData(data)
      
         
-    } catch (error) {
-        console.log(error);
+//     } catch (error) {
+//         console.log(error);
         
         
-    }
+//     }
+         
+// }
+
+const filterData=()=>{
+
+      fetchProductsByCategory(category).then((data)=>setSearchData(data)
+      )
          
 }
 

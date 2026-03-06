@@ -1,17 +1,12 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
-import { initializeApp } from "firebase/app";
-import { collection,addDoc, getFirestore ,getDocs,getDoc,doc, updateDoc} from "firebase/firestore";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyASEuOda6uoxGBCD_lXJFUFOdpZeloHp2M",
-  authDomain: "ecommerce-web-app-82a45.firebaseapp.com",
-  projectId: "ecommerce-web-app-82a45",
-  storageBucket: "ecommerce-web-app-82a45.firebasestorage.app",
-  messagingSenderId: "559315569932",
-  appId: "1:559315569932:web:d262a42d1b1fc4c5784d29"
-};
-const firebaseApp=initializeApp(firebaseConfig)
+import { collection,addDoc, getFirestore ,getDocs,getDoc,doc, updateDoc, query, where} from "firebase/firestore";
+import { firebaseApp } from "./Firebase";
+
+
+
+
 const firestore=getFirestore(firebaseApp)
 
 
@@ -128,6 +123,20 @@ export const DataProvider = ({ children }) => {
     
   }
 
+  const fetchProductsByCategory=async(categoryName)=>{
+
+      const productRef=collection(firestore,'products')
+      const q=query(productRef,where("category" ,"==", categoryName))
+      const snapshot=await getDocs(q)
+      const products=snapshot.docs.map((doc)=>({
+         id:doc.id,
+         ...doc.data()
+      }))
+      return products;
+  }
+
+  
+
   return (
     <DataContext.Provider value={{ data,
      setData, 
@@ -137,6 +146,7 @@ export const DataProvider = ({ children }) => {
      uploadProductsToFirestore,
      getSingleProduct,
      updatePrices,
+     fetchProductsByCategory,
       }}>
       {children}
     </DataContext.Provider>
