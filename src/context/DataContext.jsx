@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
 
-import { collection,addDoc, getFirestore ,getDocs,getDoc,doc, updateDoc, query, where} from "firebase/firestore";
+import { collection,addDoc, getFirestore ,getDocs,getDoc,doc, updateDoc, query, where, setDoc, serverTimestamp} from "firebase/firestore";
 import { firebaseApp } from "./Firebase";
 
 
@@ -135,6 +135,29 @@ export const DataProvider = ({ children }) => {
       return products;
   }
 
+  const saveUserToFireStore=async(user)=>{
+    try {
+      const userRef=doc(firestore,'users',user.id);
+      const userSnap=await getDoc(userRef)
+      if(!userSnap.exists()){
+      await  setDoc(userRef,{
+           name:user.fullName,
+           email:user.primaryEmailAddress.emailAddress,
+           createdAt:serverTimestamp()
+        })
+         console.log("user Saved successfully");
+      }
+     
+      
+      
+    } catch (error) {
+       console.log(error);
+       
+    }
+    
+    
+  }
+
   
 
   return (
@@ -147,6 +170,7 @@ export const DataProvider = ({ children }) => {
      getSingleProduct,
      updatePrices,
      fetchProductsByCategory,
+     saveUserToFireStore,
       }}>
       {children}
     </DataContext.Provider>

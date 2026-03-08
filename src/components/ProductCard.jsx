@@ -5,7 +5,7 @@ import { useCart } from '../context/CartContext';
 import { useUser } from '@clerk/clerk-react'
 
 const ProductCard = ({product}) => {
-    // console.log(product);
+     console.log(product.id);
     const{user}=useUser()
     // console.log(user);
     

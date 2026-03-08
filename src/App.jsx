@@ -11,15 +11,18 @@ import Category from './components/Category'
 import Footer from './components/Footer'
 import SingleProduct from './pages/SingleProduct'
 import CategoryProduct from './pages/CategoryProduct'
+import { getData } from './context/DataContext'
+import { useUser } from '@clerk/clerk-react'
 
 
 
 
 const App = () => {
   
-  
+     const{user}=useUser()
   const[location,setLocation]=useState()
   const[openDropDown,setOpenDropDown]=useState(false)
+  const{saveUserToFireStore}=getData()
   const toggleDropdown=()=>{
     setOpenDropDown(!openDropDown)
   }
@@ -41,6 +44,13 @@ const App = () => {
       
     })
   }
+ useEffect(()=>{
+  if(user){
+    saveUserToFireStore(user)
+  }
+ 
+},[user])
+
   useEffect(()=>{
    getLocation()
   },[])
