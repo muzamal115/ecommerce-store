@@ -15,9 +15,10 @@ if (!PUBLISHABLE_KEY) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+   <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
     <DataProvider>
     <CartProvider>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+    
     <App />
     <ToastContainer
 position="bottom-right"
@@ -32,8 +33,9 @@ pauseOnHover
 theme="light"
 
 />
-    </ClerkProvider>
+    
     </CartProvider>
     </DataProvider>
+    </ClerkProvider>
   </StrictMode>
 )

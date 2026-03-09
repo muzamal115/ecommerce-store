@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCart } from '../context/CartContext'
 import { FaRegTrashAlt } from 'react-icons/fa'
 import { LuNotebook, LuNotebookText } from 'react-icons/lu'
@@ -13,10 +13,20 @@ const Cart = ({location,getLocation}) => {
     const navigate=useNavigate()
     const [userName,setUserName]=useState(user?.fullName)
     
+    
    
     
-     const{cartItem,updateQuantity,deleteItem}=  useCart()
+     const{cartItem,updateQuantity,deleteItem,fetchCart}=  useCart()
+       const cart=useCart()
+     console.log(cart);
+     
      const totalPrice = Math.round(cartItem.reduce((total, item) => total + (item.price*item.quantity), 0));
+     useEffect(()=>{
+      if(user){
+      fetchCart()
+      }
+      
+     },[user])
   return (
     <div className='mt-10 max-w-6xl mx-auto mb-5 md:px-0 px-4'>
     {
@@ -82,7 +92,7 @@ const Cart = ({location,getLocation}) => {
               <div className="flex w-full gap-5">
                 <div className="flex flex-col space-y-1 w-full">
                   <label htmlFor="">Country</label>
-                  <input type="text" value={location.country} placeholder='Enter your country' className='w-full p-2 rounded-md' />
+                  <input type="text" placeholder='Enter your country' className='w-full p-2 rounded-md' />
                 </div>
                <div className="flex flex-col space-y-1 w-full">
                   <label htmlFor="">Phone No</label>
