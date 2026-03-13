@@ -13,7 +13,7 @@ import ResponsiveMenu from './ResponsiveMenu'
 
 const Navbar = ({location,openDropDown,toggleDropdown,getLocation}) => {
    
-    const{cartItem}=useCart()
+    const{cartItems}=useCart()
     const[openNav,setOpenNav]=useState(false)
   
   
@@ -58,7 +58,7 @@ const Navbar = ({location,openDropDown,toggleDropdown,getLocation}) => {
           <IoCartOutline  className='w-7 h-7 '/>
             
           
-          <span className='absolute px-2 -top-3 left-3 bg-red-500 rounded-full text-white'>{cartItem.length}</span>
+          <span className='absolute px-2 -top-3 left-3 bg-red-500 rounded-full text-white'>{cartItems.length}</span>
           
           </Link>
           <div className='hidden md:block'>

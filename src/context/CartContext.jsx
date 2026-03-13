@@ -14,7 +14,8 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const{user}=useUser()
-  const [cartItem, setCartItem] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+ 
 
 
   // -------------------------
@@ -25,23 +26,23 @@ export const CartProvider = ({ children }) => {
       toast.error("Please login first")
       return;
     }
-    const itemInCart = cartItem.find((item) => item.id === product.id);
+    const itemInCart = cartItems.find((item) => item.id === product.id);
     try {
       const itemRef=doc(firestore,'users',user.id,'cart',product.id)
 
       if (itemInCart) {
-      const updatedCart = cartItem.map((item) =>
+      const updatedCart = cartItems.map((item) =>
         item.id === product.id
           ? { ...item, quantity: item.quantity + 1 }
           : item
       );
 
-      setCartItem(updatedCart);
+      setCartItems(updatedCart);
       await updateDoc(itemRef,{quantity:itemInCart.quantity+1})
       toast.success("Quantity increased")
     } else {
         // Add new Product
-      setCartItem([...cartItem, { ...product, quantity: 1 }]);
+      setCartItems([...cartItems, { ...product, quantity: 1 }]);
       await setDoc(itemRef, { ...product,  quantity: 1 })
       toast.success("Item added successfully")
     }
@@ -84,7 +85,7 @@ export const CartProvider = ({ children }) => {
       })
       .filter((item) => item !== null); // remove null
 
-    setCartItem(updated);
+    setCartItems(updated);
 
     try {
       const itemRef=doc(firestore,'users',user.id,'cart',productId)
@@ -104,7 +105,7 @@ export const CartProvider = ({ children }) => {
    
   // delete item
     const deleteItem = async (productId) => {
-    setCartItem(cartItem.filter((item) => item.id !== productId));
+    setCartItems(cartItems.filter((item) => item.id !== productId));
     try {
       const itemRef = doc(firestore, "users", user.id, "cart", productId);
       await deleteDoc(itemRef);
@@ -121,7 +122,7 @@ export const CartProvider = ({ children }) => {
     const cartRef=collection(firestore,'users',user.id,'cart')
     const snapshot=await getDocs(cartRef)
     const items=snapshot.docs.map((doc)=>({id:doc.id,...doc.data()}))
-    setCartItem(items)
+    setCartItems(items)
    } catch (error) {
     console.log("Error fetching cart:", error);
     
@@ -132,12 +133,13 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider
       value={{
-        cartItem,
-        setCartItem,
+        cartItems,
+        setCartItems,
         addToCart,
         updateQuantity,
         deleteItem,
         fetchCart,
+        
       }}
     >
       {children}
