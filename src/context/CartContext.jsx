@@ -58,7 +58,7 @@ export const CartProvider = ({ children }) => {
   // Update Quantity Function
   // -------------------------
   const updateQuantity = async(productId, action) => {
-    const updated = cartItem
+    const updated = cartItems
       .map((item) => {
         if (item.id === productId) {
           // console.log(item);
@@ -123,7 +123,7 @@ export const CartProvider = ({ children }) => {
     const snapshot=await getDocs(cartRef)
     const items=snapshot.docs.map((doc)=>({id:doc.id,...doc.data()}))
     setCartItems(items)
-   } catch (error) {
+   } catch (error)  {
     console.log("Error fetching cart:", error);
     
     

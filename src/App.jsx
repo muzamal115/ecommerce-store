@@ -15,6 +15,8 @@ import { getData } from './context/DataContext'
 import { useUser } from '@clerk/clerk-react'
 import { useCart } from './context/CartContext'
 import OrderSuccessCard from './components/OrderSuccessCard'
+import MyOrders from './pages/MyOrders'
+import { usePlaceOrder } from './context/PlaceOrderContext'
 
 
 
@@ -25,6 +27,7 @@ const App = () => {
   const[location,setLocation]=useState()
   const[openDropDown,setOpenDropDown]=useState(false)
   const{saveUserToFireStore}=getData()
+    const{fetchOrderData,orders}= usePlaceOrder()
 
     const{fetchCart}=   useCart()
   const toggleDropdown=()=>{
@@ -65,6 +68,9 @@ useEffect(()=>{
   useEffect(()=>{
    getLocation()
   },[])
+  useEffect(() => {
+  if (user) fetchOrderData(user)
+}, [user])
   return (
     <BrowserRouter>
     
@@ -79,6 +85,8 @@ useEffect(()=>{
      <Route path='/about' element={<About/>}/>
      <Route path='/contact' element={<Contact/>}/>
      <Route path='/cart' element={<Cart location={location} getLocation={getLocation}/>}/>
+     <Route path='/orders' element={<MyOrders orders={orders}/>}/>
+     
     </Routes>
     <Footer/>
 

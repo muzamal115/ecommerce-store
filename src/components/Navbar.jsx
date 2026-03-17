@@ -1,5 +1,5 @@
 
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react'
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from '@clerk/clerk-react'
 import { MapPin } from 'lucide-react'
 import React, { useState } from 'react'
 import { CgClose } from 'react-icons/cg'
@@ -15,6 +15,7 @@ const Navbar = ({location,openDropDown,toggleDropdown,getLocation}) => {
    
     const{cartItems}=useCart()
     const[openNav,setOpenNav]=useState(false)
+     const{user}=useUser()
   
   
   return (
@@ -52,7 +53,11 @@ const Navbar = ({location,openDropDown,toggleDropdown,getLocation}) => {
             <NavLink to={'/products'} className={({isActive})=>`${isActive?'border-b-3 transition-all border-red-500':''}`}><li>Products</li></NavLink>
             <NavLink to={'/about'} className={({isActive})=>`${isActive?'border-b-3 transition-all border-red-500':''}`}><li>About</li></NavLink>
             <NavLink to={'/contact'} className={({isActive})=>`${isActive?'border-b-3 transition-all border-red-500':''}`}><li>Contact</li></NavLink>
-            
+            {
+              user?
+              <NavLink to={'/orders'} className={({isActive})=>`${isActive?'border-b-3 transition-all border-red-500':''}`}><li>My Orders</li></NavLink>:''
+            }
+             
           </ul>
           <Link to={'/cart'} className='relative'>
           <IoCartOutline  className='w-7 h-7 '/>

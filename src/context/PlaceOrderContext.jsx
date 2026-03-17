@@ -1,4 +1,4 @@
-import { doc, getFirestore, serverTimestamp, setDoc, collection, deleteDoc } from "firebase/firestore";
+import { doc, getFirestore, serverTimestamp, setDoc, collection, deleteDoc, getDocs } from "firebase/firestore";
 import { createContext, useContext, useState } from "react";
 import { firebaseApp } from "./Firebase";
 import { useCart } from "./CartContext";
@@ -12,6 +12,7 @@ const firestore = getFirestore(firebaseApp);
 export const PlaceOrderProvider = ({ children }) => {
   const [showSuccessCard, setShowSuccessCard] = useState(false);
   const [orderId,setOrderId]=useState()
+  const[orders,setOrders]=useState([])
   const {setCartItems}=useCart()
 
   const placeOrder = async (user, cartItems, userFormData, pricing, paymentMethod) => {
@@ -46,7 +47,10 @@ export const PlaceOrderProvider = ({ children }) => {
       paymentMethod: paymentMethod,
       createdAt: serverTimestamp()
     };
-
+  
+    console.log(orderData);
+   setOrders(prev => [orderData, ...prev])
+    
     // Save to Firestore
     await setDoc(orderRef, orderData);
     setOrderId(orderRef.id)
@@ -67,10 +71,26 @@ export const PlaceOrderProvider = ({ children }) => {
     toast.error("Failed to place order");
 
   }
+
 };
+const fetchOrderData=async(user)=>{
+  if(!user) return
+ try {
+   const orderRef = collection(firestore, 'users', user.id, 'orders');
+   const snapshot=await getDocs(orderRef)
+   const items=snapshot.docs.map((doc)=>({id:doc.id,...doc.data()}))
+   console.log("success fully data fetched",items);
+   
+   setOrders(items)
+  
+ } catch (error) {
+   console.log("fetching Orders Data :",error);
+   
+ }
+}
 
   return (
-    <PlaceOrderContext.Provider value={{ showSuccessCard, setShowSuccessCard ,placeOrder,orderId}}>
+    <PlaceOrderContext.Provider value={{ showSuccessCard, setShowSuccessCard ,placeOrder,orderId,orders,fetchOrderData}}>
       {children}
     </PlaceOrderContext.Provider>
   );
