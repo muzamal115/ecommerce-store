@@ -79,7 +79,7 @@ const fetchOrderData=async(user)=>{
    const orderRef = collection(firestore, 'users', user.id, 'orders');
    const snapshot=await getDocs(orderRef)
    const items=snapshot.docs.map((doc)=>({id:doc.id,...doc.data()}))
-   console.log("success fully data fetched",items);
+  //  console.log("success fully data fetched",items);
    
    setOrders(items)
   

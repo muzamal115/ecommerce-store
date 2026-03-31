@@ -19,21 +19,7 @@ const SingleProduct = () => {
    
 
  
-   // const getSingleProduct=async()=>{
-
-   //    try {
-   //       const res=  await axios.get(`https://dummyjson.com/products/${id}`)
-   //       const product=res.data;
-   //       setSingleProduct(product)
-   //    // console.log(product);
-    
-   // } catch (error) {
-   //  console.log(error);
-    
-   // }
-     
-      
-   // }
+ 
    useEffect(()=>{
     getSingleProduct(id).then((value)=>setSingleProduct(value.data())
     );

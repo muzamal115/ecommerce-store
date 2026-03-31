@@ -17,6 +17,15 @@ import { useCart } from './context/CartContext'
 import OrderSuccessCard from './components/OrderSuccessCard'
 import MyOrders from './pages/MyOrders'
 import { usePlaceOrder } from './context/PlaceOrderContext'
+import UserLayout from './layouts/UserLayout'
+import AdminLayout from './layouts/AdminLayout'
+import Dashboard from './components/admin/Dashboard'
+import AdminOrders from './components/admin/AdminOrders'
+import Users from './components/admin/Users'
+import AdminProducts from './components/admin/AdminProducts'
+import Customers from './components/admin/Customers'
+import AddProduct from './components/admin/pages/AddProduct'
+import ProductDetail from './components/admin/pages/ProductDetail'
 
 
 
@@ -74,11 +83,13 @@ useEffect(()=>{
   return (
     <BrowserRouter>
     
-    <Navbar location={location} openDropDown={openDropDown} toggleDropdown={toggleDropdown} getLocation={getLocation}/>
+  
    
    
     <Routes>
-     <Route path='/' element={<Home/>}/>
+      {/* User Side */}
+      <Route  path='/' element={<UserLayout  location={location} openDropDown={openDropDown} toggleDropdown={toggleDropdown} getLocation={getLocation} />}>
+     <Route index element={<Home/>}/>
      <Route path='/products' element={<Products/>}/>
      <Route path='/products/:id' element={<SingleProduct/>}/>
      <Route path='/category/:category' element={<CategoryProduct/>}/>
@@ -86,9 +97,24 @@ useEffect(()=>{
      <Route path='/contact' element={<Contact/>}/>
      <Route path='/cart' element={<Cart location={location} getLocation={getLocation}/>}/>
      <Route path='/orders' element={<MyOrders orders={orders}/>}/>
+     </Route>
+
+     {/* Admin Side */}
+     <Route path='/admin' element={<AdminLayout/>}>
+     <Route index element={<Dashboard/>} />
+     <Route path='products' element={<AdminProducts/>} />
+     <Route path='products/:id' element={<ProductDetail/>} />
+      <Route path='products/add' element={<AddProduct isEdit={false} />} /> 
+      <Route path='products/edit/:id' element={<AddProduct isEdit={true} />} /> 
+     <Route path='orders' element={<AdminOrders/>} />
+     <Route path='customers' element={<Customers/>} /> 
+    
+    
+
+     </Route>
      
     </Routes>
-    <Footer/>
+   
 
     </BrowserRouter>
   )

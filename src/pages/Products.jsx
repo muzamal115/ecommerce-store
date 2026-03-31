@@ -14,12 +14,12 @@ const Products = () => {
     const[search,setSearch]=useState("")
     const[category,setCategory]=useState("All")
     const[brand,setBrand]=useState("All")
-    const[priceRange,setPriceRange]=useState([0,5000])
+    const[priceRange,setPriceRange]=useState([0,500000])
     const[page,setPage]=useState(1)
     const[openFilter,setOpenFilter]=useState(false)
     useEffect(()=>{
    fetchAllProducts()
-    },[])
+    },[data])
    
      
     useEffect(() => {
@@ -56,7 +56,7 @@ const dynamicPage=Math.ceil(filteredData?.length/12)
 
 
   return (
-    <div>
+    <div >
       <MobileFilter openFilter={openFilter} setOpenFilter={setOpenFilter} search={search} setSearch={setSearch}
       category={category} setCategory={setCategory}
       brand={brand} setBrand={setBrand}
