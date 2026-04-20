@@ -93,7 +93,11 @@ const Cart = ({ location, getLocation }) => {
                 })}
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 md:gap-20">
+   
+             {/* User Form */}
+
                 <Form cartItems={cartItems} pricing={pricing} />
+
 
                 <div className="bg-white border border-gray-100 shadow-xl p-7 rounded-md mt-4 space-y-2 h-max order-1 md:order-2">
                   <h1 className="text-gray-800 font-bold text-xl">
@@ -154,7 +158,7 @@ const Cart = ({ location, getLocation }) => {
         ) : (
           <div className="flex flex-col gap-3 justify-center items-center h-[600px]">
             <h1 className="text-red-500/80 font-bold text-5xl text-muted">
-             Your cart is empty
+              Cart is empty
             </h1>
             <img src={emptyCart} alt="" className="w-[400px]" />
             <button

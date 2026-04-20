@@ -8,7 +8,7 @@ import {
 import { useUser } from "@clerk/clerk-react";
 
 
-import { usePlaceOrder } from "../context/PlaceOrderContext";
+import { useOrdersData } from "../context/OrderContext";
 
 
 const Form = ({ cartItems, pricing }) => {
@@ -25,7 +25,7 @@ const Form = ({ cartItems, pricing }) => {
   const [phoneNumber, setPhoneNumber] = useState();
   const [selectedPayment, setSelectedPayment] = useState("cod");
 
-  const { placeOrder ,orderSuccess} = usePlaceOrder();
+  const { placeOrder ,orderSuccess} = useOrdersData();
 
   const orderSubmit = (e) => {
     e.preventDefault();

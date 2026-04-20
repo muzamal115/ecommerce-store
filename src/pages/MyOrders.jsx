@@ -1,84 +1,16 @@
 import React from "react";
 
-// const orders = [
-//   {
-//     id: "A12345",
-//     date: "12 March 2026",
-//     status: "Shipped",
-//     pricing: {
-//       subtotal: 5300,
-//       shipping: 200,
-//       total: 5500
-//     },
-//     payment: "Cash on Delivery",
-//     address: "Multan, Punjab, Pakistan",
-//     items: [
-//       {
-//         id: "p1",
-//         title: "Nike Shoes",
-//         price: 3000,
-//         quantity: 1,
-//         image: "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods/thumbnail.webp",
-//       },
-//       {
-//         id: "p2",
-//         title: "T-Shirt",
-//         price: 1000,
-//         quantity: 2,
-//         image: "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods/thumbnail.webp",
-//       },
-//       {
-//         id: "p3",
-//         title: "Watch",
-//         price: 300,
-//         quantity: 1,
-//         image: "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods/thumbnail.webp",
-//       },
-//     ],
-//   },
 
-//    {
-//     id: "A12345",
-//     date: "12 March 2026",
-//     status: "Cancelled",
-//     pricing: {
-//       subtotal: 5300,
-//       shipping: 200,
-//       total: 5500
-//     },
-//     payment: "Cash on Delivery",
-//     address: "Multan, Punjab, Pakistan",
-//     items: [
-//       {
-//         id: "p1",
-//         title: "Nike Shoes",
-//         price: 3000,
-//         quantity: 1,
-//         image: "https://cdn.dummyjson.com/product-images/mobile-accessories/apple-airpods/thumbnail.webp",
-//       },
-      
-//     ],
-//   }
-// ];
 
 const MyOrders = ({orders}) => {
 
   
-const getStatusStyle = (status) => {
-  switch (status) {
-    case "Placed":
-      return "bg-gray-200 text-gray-700";
-    case "Processing":
-      return "bg-blue-100 text-blue-600";
-    case "Shipped":
-      return "bg-orange-100 text-orange-600";
-    case "Delivered":
-      return "bg-green-100 text-green-600";
-    case "Cancelled":
-      return "bg-red-100 text-red-600";
-    default:
-      return "bg-gray-200";
-  }
+const statusColors = {
+  placed: "bg-gray-200 text-gray-700",
+  processing: "bg-blue-200 text-blue-700",
+  shipped: "bg-orange-200 text-orange-700",
+  delivered: "bg-green-200 text-green-700",
+  cancelled: "bg-red-200 text-red-700"
 };
 
 
@@ -100,7 +32,7 @@ const getStatusStyle = (status) => {
     
 
           <div
-            key={order.id}
+            key={order. orderId}
             className="bg-white border rounded-lg shadow-sm p-4 border-red-600"
           >
 
@@ -108,12 +40,12 @@ const getStatusStyle = (status) => {
             <div className="flex justify-between items-center border-b pb-3 mb-3">
 
               <div>
-                <p className="font-semibold">Order #{order.id}</p>
+                <p className="font-semibold"> {order.orderId}</p>
                 {/* <p className="text-sm text-gray-500">{order.createdAt}</p> */}
               </div>
 
               <span
-                className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusStyle(order.status)}`}
+                className={`px-3 py-1 rounded-full text-sm font-medium  ${statusColors[order.status]}`}
               >
                 {order.status}
               </span>

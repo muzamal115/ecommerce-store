@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
+import Swal from 'sweetalert2'
 
 import {
   collection,
@@ -199,15 +200,31 @@ export const DataProvider = ({ children }) => {
   const deleteProduct=async(id)=>{
     try {
      
-      
-    await deleteDoc(doc(firestore,'products',id))
+         const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "This product will be deleted!",
+        icon: "warning",
+        showCancelButton: true,
+      });
+          
+      if (result.isConfirmed){
+       await deleteDoc(doc(firestore,'products',id))
 
      setData((prev)=>prev.filter((item)=>item.id!==id))
+      Swal.fire("Deleted!", "Product has been deleted.", "success");
+      }
+      
+      
+      
+
+   
+
     
       
     } catch (error) {
       console.log("error is : ",error);
-      toast.error("Product failed to delete")
+     
+      Swal.fire("Error!", "Delete Failed", "error");
       
     }
   

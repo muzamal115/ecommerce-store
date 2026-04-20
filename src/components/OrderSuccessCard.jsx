@@ -1,18 +1,27 @@
-import React from "react";
-import { usePlaceOrder } from "../context/PlaceOrderContext";
+import React, { useEffect, useState } from "react";
+import { useOrdersData } from "../context/OrderContext";
 import { IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 
 const OrderSuccessCard = () => {
-  const {showSuccessCard,orderId,setShowSuccessCard}=usePlaceOrder()
+  const [show,setShow]=useState(true)
+  const {showSuccessCard,orderId,setShowSuccessCard}=useOrdersData()
    const navigate= useNavigate()
+
+
+  //  useEffect(()=>{
+  //     setTimeout(() => {
+  //         setShow(false)
+  //     }, 5000);
+  //  },[])
 
   const onClose=()=>{
     setShowSuccessCard(false)
   }
  
   return (
+
     <div>
       {showSuccessCard? (
         <div className="fixed inset-0 bg-black/70  flex items-center justify-center z-50">

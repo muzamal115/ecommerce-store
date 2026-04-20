@@ -6,7 +6,7 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import { DataProvider } from './context/DataContext.jsx'
 import { CartProvider } from './context/CartContext.jsx'
 import { ToastContainer } from 'react-toastify'
-import { PlaceOrderProvider } from './context/PlaceOrderContext.jsx'
+import { OrderProvider } from './context/OrderContext.jsx'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')).render(
    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
     <DataProvider>
     <CartProvider>
-      <PlaceOrderProvider>
+      <OrderProvider>
     
     <App />
     <ToastContainer
@@ -35,7 +35,7 @@ pauseOnHover
 theme="light"
 
 />
-</PlaceOrderProvider>
+</OrderProvider>
     
     </CartProvider>
     </DataProvider>

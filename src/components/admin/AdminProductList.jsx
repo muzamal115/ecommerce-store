@@ -4,7 +4,7 @@ import { Eye, Edit2, Trash2 } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import { getData } from '../../context/DataContext';
 import { useState } from 'react';
-import Swal from 'sweetalert2'
+
 
 
 const AdminProductList = ({p,status}) => {
@@ -14,19 +14,11 @@ const AdminProductList = ({p,status}) => {
          const{ deleteProduct,isDeleting} = getData()
 
       const handleDelete=async(id)=>{
-      const result = await Swal.fire({
-  title: "Are you sure?",
-  text: "This product will be deleted!",
-  icon: "warning",
-  showCancelButton: true,
-});
 
-if (result.isConfirmed) {
-  await deleteProduct(id);
-  Swal.fire("Deleted!", "Product has been deleted.", "success");
-
+     setDeletingId(id)
+     await deleteProduct(id);
+     setDeletingId(null)
  
-}
 
       }
   

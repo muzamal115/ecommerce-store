@@ -5,13 +5,13 @@ import AdminHeader from '../components/admin/AdminHeader'
 
 const AdminLayout = () => {
   return (
-   <div className="flex h-screen">
+   <div className="flex h-screen overflow-hidden overflow-x-hidden">
   
   {/* Sidebar */}
   <Sidebar />
 
   {/* Right Side */}
-  <div className="flex-1 flex flex-col">
+  <div className="flex-1 flex flex-col min-w-0">
     
     {/* Header (fixed height) */}
     <AdminHeader />

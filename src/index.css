@@ -10,3 +10,13 @@ input{
     border: 1px solid #ccc;
     color:#333;
 }
+
+@media print {
+  * { 
+    display: none !important; 
+  }
+  .drawer-print,
+  .drawer-print * { 
+    display: revert !important; 
+  }
+}

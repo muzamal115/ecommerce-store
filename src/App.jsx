@@ -16,7 +16,7 @@ import { useUser } from '@clerk/clerk-react'
 import { useCart } from './context/CartContext'
 import OrderSuccessCard from './components/OrderSuccessCard'
 import MyOrders from './pages/MyOrders'
-import { usePlaceOrder } from './context/PlaceOrderContext'
+import { useOrdersData } from './context/OrderContext'
 import UserLayout from './layouts/UserLayout'
 import AdminLayout from './layouts/AdminLayout'
 import Dashboard from './components/admin/Dashboard'
@@ -36,7 +36,7 @@ const App = () => {
   const[location,setLocation]=useState()
   const[openDropDown,setOpenDropDown]=useState(false)
   const{saveUserToFireStore}=getData()
-    const{fetchOrderData,orders}= usePlaceOrder()
+    const{fetchOrderData,orders}= useOrdersData()
 
     const{fetchCart}=   useCart()
   const toggleDropdown=()=>{
@@ -109,8 +109,6 @@ useEffect(()=>{
      <Route path='orders' element={<AdminOrders/>} />
      <Route path='customers' element={<Customers/>} /> 
     
-    
-
      </Route>
      
     </Routes>

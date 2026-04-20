@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getData } from "../../../context/DataContext";
 import { useNavigate, useParams } from "react-router-dom";
-import Swal from 'sweetalert2'
+
 import { log } from "firebase/firestore/pipelines";
 
 const ProductDetail = () => {
@@ -15,22 +15,17 @@ const ProductDetail = () => {
   const{getSingleProduct,deleteProduct}=getData()
 
     const handleDelete=async()=>{
-        const result = await Swal.fire({
-    title: "Are you sure?",
-    text: "This product will be deleted!",
-    icon: "warning",
-    showCancelButton: true,
-  });
   
-  if (result.isConfirmed) {
+  
+  
     setIsDeleting(true)
     await deleteProduct(id);
-      Swal.fire("Deleted!", "Product has been deleted.", "success");
+  
     setIsDeleting(false)
   navigate('/admin/products')
   
   
-  }
+ 
   
         }
 
