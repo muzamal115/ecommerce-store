@@ -26,6 +26,7 @@ import AdminProducts from './components/admin/AdminProducts'
 import Customers from './components/admin/Customers'
 import AddProduct from './components/admin/pages/AddProduct'
 import ProductDetail from './components/admin/pages/ProductDetail'
+import CustomerDetail from './components/admin/CustomerDetail'
 
 
 
@@ -108,6 +109,7 @@ useEffect(()=>{
       <Route path='products/edit/:id' element={<AddProduct isEdit={true} />} /> 
      <Route path='orders' element={<AdminOrders/>} />
      <Route path='customers' element={<Customers/>} /> 
+     <Route path='customers/:id' element={<CustomerDetail/>} /> 
     
      </Route>
      

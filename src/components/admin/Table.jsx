@@ -28,7 +28,7 @@ const Table = ({columns,children}) => {
             <tr className="text-left border-b bg-gray-100 border-gray-300">
              
              {columns.map((col)=>(
-              <th className="p-2 ">{col}</th>
+              <th className="p-2  ">{col}</th>
              ))} 
               
             </tr>

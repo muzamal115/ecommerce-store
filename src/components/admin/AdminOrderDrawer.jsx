@@ -13,7 +13,7 @@ const AdminOrderDrawer = ({ orderDetail, onClose }) => {
     <>
       {/* Overlay */}
       <div
-        className="md:h-full h-screen  border "
+        className="md:h-full h-screen   "
         onClick={onClose}
       />
 

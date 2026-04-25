@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import AdminProductList from './AdminProductLIst';
 import AdminPagination from "./AdminPagination";
 import { Eye, Edit2, Trash2,Search } from "lucide-react";
+import LoadingSpinner from './LoadingSpinner';
 const AdminProducts = () => {
   const{fetchAllProducts,data,calculateStockStats,categoryOnlyData,deleteProduct}=getData()
   const[showAddProductPage,setShowAddProductPage]=useState(false)
@@ -126,8 +127,8 @@ const stockStats= calculateStockStats(data)
 if(!data||data.length==0){
   return(
     
-      <div className="flex items-center justify-center  h-full text-2xl font-semibold">
-      Loading...</div>
+       <LoadingSpinner/>
+    
     
   )
 }

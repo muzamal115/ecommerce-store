@@ -6,6 +6,7 @@ import AdminPagination from "./AdminPagination";
 import { useOrdersData } from '../../context/OrderContext';
 import { log } from 'firebase/firestore/pipelines';
 import AdminOrderDrawer from './AdminOrderDrawer';
+import LoadingSpinner from './LoadingSpinner';
 
 const AdminOrders = () => {
 
@@ -50,7 +51,7 @@ const onClose=()=>{
         }
     })
 
-    console.log(filteredOrders)
+    
     //End Filter data logic 
          
  
@@ -133,13 +134,14 @@ const statusOptions = [
   
 
 
-if(filteredOrders?.length === 0 === 0){
+if(!ordersData||ordersData.length==0){
   return(
-    <div className="flex flex-col items-center justify-center h-full gap-2 text-gray-500">
-      <Package size={40} />
-      <p className="text-lg font-medium">No orders found</p>
-      <p className="text-sm">Try changing your search or filter</p>
-    </div>
+    // <div className="flex flex-col items-center justify-center h-full gap-2 text-gray-500">
+    //   <Package size={40} />
+    //   <p className="text-lg font-medium">No orders found</p>
+    //   <p className="text-sm">Try changing your search or filter</p>
+    // </div>
+    <LoadingSpinner/>
   )
 }
 else{

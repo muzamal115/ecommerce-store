@@ -1,4 +1,4 @@
-import { doc, getFirestore, serverTimestamp, setDoc, collection, deleteDoc, getDocs, query, orderBy, updateDoc } from "firebase/firestore";
+import { doc, getFirestore, serverTimestamp, setDoc, collection, deleteDoc, getDocs, query, orderBy, updateDoc, where } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
 import { firebaseApp } from "./Firebase";
 import { useCart } from "./CartContext";
@@ -7,17 +7,12 @@ import { toast } from "react-toastify";
 export const OrderContext = createContext();
 const firestore = getFirestore(firebaseApp);
 
-
-
-
-
 export const OrderProvider = ({ children }) => {
   const [showSuccessCard, setShowSuccessCard] = useState(false);
   const [orderId,setOrderId]=useState()
   const[orders,setOrders]=useState([])
   const [ordersData,setOrdersData]=useState([])
   const {setCartItems}=useCart()
-
 
 function generateOrderID() {
   const date = new Date();
@@ -101,9 +96,16 @@ const fetchOrderData=async(user)=>{
   if(!user) return
  try {
    const orderRef = collection(firestore,'orders');
-   const snapshot=await getDocs(orderRef)
-   const items=snapshot.docs.map((doc)=>({id:doc.id,...doc.data()}))
-  //  console.log("success fully data fetched",items);
+   const q=query(orderRef,where("userId","==",user.id))
+   const snapshot=await getDocs(q)
+ const items=snapshot.docs.map((doc)=>{
+   const data=doc.data()
+  return{
+   id:doc.id,
+   ...data,  createdAt: data.createdAt ? data.createdAt.toDate() : null
+
+ }})
+   console.log("success fully data fetched",items);
 
   
    
@@ -135,7 +137,7 @@ const fetchAllOrders=async()=>{
 
  }})
 
- console.log(allData)
+ 
 
  setOrdersData(allData)
  
@@ -190,7 +192,7 @@ const fetchAllOrders=async()=>{
 //  update status
 
 const updateStatus=async(orderId,newStatus)=>{
-   console.log(orderId);
+   
    
 
   try {
@@ -200,11 +202,11 @@ const updateStatus=async(orderId,newStatus)=>{
     status:newStatus
       }
 
-        // setData((prev)=>prev.map((item)=>item.id==id?{...item,...updatedData}:item) )    
+          
            
       )
-        setOrdersData((prev)=>prev.map((item)=>item.id=orderId?{...item,status:newStatus}:item))
-      
+        // setOrdersData((prev)=>prev.map((item)=>orderId= item.id?{...item,status:newStatus}:item))
+     
 
       toast.success("Status changed successfully!")
     

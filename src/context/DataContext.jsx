@@ -28,6 +28,7 @@ export const getData = () => useContext(DataContext);
 export const DataProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [isAdding,setIsAdding]=useState(false)
+  const[users,setUsers]=useState([])
 
 
   const getUniqueCategory = (data, property) => {
@@ -89,10 +90,7 @@ export const DataProvider = ({ children }) => {
   const fetchAllProducts = async () => {
     try {
 
-      // const q=query(
-      //   collection(firestore,"products"),
-      //   orderBy("createdAt","desc")
-      // )
+    
       const result = await getDocs(collection(firestore,"products"))
 
       const allData = result.docs.map((doc) => ({
@@ -105,6 +103,8 @@ export const DataProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+  
   const getSingleProduct = async (id) => {
    
     
@@ -230,6 +230,8 @@ export const DataProvider = ({ children }) => {
   
   }
 
+  // create collection of user in firestore
+
   const saveUserToFireStore = async (user) => {
     try {
       const userRef = doc(firestore, "users", user.id);
@@ -246,6 +248,24 @@ export const DataProvider = ({ children }) => {
       console.log(error);
     }
   };
+
+
+  //Fetch users
+  const fetchUsers=async()=>{
+    try {
+          
+      const result=await getDocs(collection(firestore,'users'))
+          const allUsers=result.docs.map((doc)=>({
+            ...doc.data(),
+            id:doc.id
+          }))
+          setUsers(allUsers)
+
+    } catch (error) {
+        console.log("Error is ", error);
+        
+    }
+  }
 
    const calculateStockStats=()=>{
    
@@ -272,6 +292,85 @@ data.forEach((product)=>{
 return stats;
    }
 
+   // customer stats 
+
+   const calculateCustomerStats=(users,orders)=>{
+
+   
+    
+      
+    const totalCustomers=users.length;
+    const totalOrders=orders.length;
+
+    const totalRevenue=orders.reduce((sum,o)=>{
+           
+      return sum+(o.pricing?.subtotal||0)
+                  
+    },0)
+
+     const newCustomers = users.filter((u) => {
+    if (!u.createdAt) return false;
+
+    const userDate = new Date(u.createdAt.toDate());
+    const now = new Date();
+
+    const diffInDays = (now - userDate) / (1000 * 60 * 60 * 24);
+    
+
+    return diffInDays <= 7;
+  }).length;
+
+    return{
+      totalCustomers,
+      totalOrders,
+      totalRevenue,
+      newCustomers
+    }
+
+
+   }
+
+
+   // Get user Stats to show in customer page
+
+   const getuserStats=(userId,orders)=>{
+
+    const userOrders=orders.filter((o)=>o.userId===userId)
+
+    let totalSpend=0
+    userOrders.forEach(o=>{
+      totalSpend+=o?.pricing?.subtotal||0
+    }) 
+    return{
+      orders:userOrders.length,
+      totalSpend,
+    }
+
+   }
+   
+   // Getting all store overview
+
+   const getStoreOverview=(products,orders,customers)=>{
+    
+    let stats={
+      totalOrders:orders.length,
+      totalRevenue:0,
+      totalCustomers:customers.length,
+      totalProducts:products.length
+    }
+
+orders.forEach(o=>{
+    
+  stats.totalRevenue+=o?.pricing.subtotal
+
+})
+
+return stats
+      
+
+   }
+
+
   return (
     <DataContext.Provider
       value={{
@@ -291,6 +390,11 @@ return stats;
         setIsAdding,
         updateProduct,
         deleteProduct,
+        users,
+        fetchUsers,
+        calculateCustomerStats,
+        getuserStats,
+        getStoreOverview
       
       }}
     >

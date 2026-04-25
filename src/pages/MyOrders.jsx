@@ -4,13 +4,19 @@ import React from "react";
 
 const MyOrders = ({orders}) => {
 
+
+  const sortedOrders=orders.sort((a,b)=>{
+    return b.createdAt-a.createdAt
+  })
   
-const statusColors = {
-  placed: "bg-gray-200 text-gray-700",
-  processing: "bg-blue-200 text-blue-700",
-  shipped: "bg-orange-200 text-orange-700",
-  delivered: "bg-green-200 text-green-700",
-  cancelled: "bg-red-200 text-red-700"
+const statusColors=(status) => {
+  const s= status=='pending'?'placed':status
+  if(s==='placed') return "bg-gray-200 text-gray-700";
+ else if (s==='processing')  return"bg-blue-200 text-blue-700";
+  else if (s==='shipped')  return"bg-orange-200 text-orange-700";
+  else if (s==='delivered')  return"bg-green-200 text-green-700";
+ else if (s==='cancelled')  return"bg-red-200 text-red-700"
+
 };
 
 
@@ -23,107 +29,119 @@ const statusColors = {
      </div>
       ); }
   return (
-    <div className="max-w-5xl mx-auto p-4 ">
+    <div className="max-w-4xl mx-auto px-4 py-8">
 
-      <h1 className="text-2xl font-bold mb-6">My Orders</h1>
+  <h1 className="text-2xl font-bold text-gray-800 mb-8">My Orders</h1>
 
-      <div className="space-y-6 ">
-        {orders.map((order) => (
-    
+  <div className="space-y-6">
+    {sortedOrders?.map((order, index) => {
+       
+         const displayStatus = order.status === "pending" ? "placed" : order.status;
+    return(
+      <div
+        key={order.orderId}
+        className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+      >
 
-          <div
-            key={order. orderId}
-            className="bg-white border rounded-lg shadow-sm p-4 border-red-600"
-          >
-
-            {/* Order Header */}
-            <div className="flex justify-between items-center border-b pb-3 mb-3">
-
-              <div>
-                <p className="font-semibold"> {order.orderId}</p>
-                {/* <p className="text-sm text-gray-500">{order.createdAt}</p> */}
-              </div>
-
-              <span
-                className={`px-3 py-1 rounded-full text-sm font-medium  ${statusColors[order.status]}`}
-              >
-                {order.status}
-              </span>
-
+        {/* ── Order Header Bar ── */}
+        <div className="bg-gray-50 border-b border-gray-100 px-5 py-3 flex flex-wrap items-center justify-between gap-2">
+          
+          <div className="flex items-center gap-3">
+            {/* Order Number Badge */}
+            <span className="bg-indigo-100 text-indigo-600 text-xs font-bold px-2.5 py-1 rounded-full">
+              #{index + 1}
+            </span>
+            <div>
+              <p className="text-xs text-gray-400">Order ID</p>
+              <p className="text-sm font-semibold text-gray-700">{order.orderId}</p>
             </div>
-
-            {/* Products */}
-            <div className="space-y-4">
-              {order.orderItems.map((item) => (
-
-                <div
-                  key={item.id}
-                  className="flex items-center gap-4 border-b pb-3"
-                >
-
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-16 h-16 object-cover rounded"
-                  />
-
-                  <div className="flex-1">
-                    <p className="font-medium">{item.title}</p>
-                    <p className="text-sm text-gray-500">
-                      Rs {item.price} × {item.quantity}
-                    </p>
-                  </div>
-
-                  <p className="font-semibold">
-                    Rs {item.price * item.quantity}
-                  </p>
-
-                </div>
-
-              ))}
-            </div>
-
-            {/* Pricing Section */}
-            <div className="mt-4 border-t pt-3 text-sm space-y-1">
-
-              <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span>Rs {order.pricing.subtotal}</span>
-              </div>
-
-              <div className="flex justify-between">
-                <span>Shipping</span>
-                <span>Rs {order.pricing.shipping}</span>
-              </div>
-
-              <div className="flex justify-between font-semibold text-lg">
-                <span>Total</span>
-                <span>Rs {order.pricing.total}</span>
-              </div>
-
-            </div>
-
-            {/* Address + Payment */}
-            <div className="mt-4 grid md:grid-cols-2 gap-4 text-sm">
-
-              <div className="">
-                <p className="font-semibold">Shipping Address</p>
-                <p className="text-gray-600">{order.userInfo.address}</p>
-              </div>
-
-              <div className="">
-                <p className="font-semibold">Payment Method</p>
-                <p className="text-gray-600">{order.paymentMethod}</p>
-              </div>
-
-            </div>
-
           </div>
 
-        ))}
-      </div>
+          <div className="flex items-center gap-4">
+            <div className="text-right">
+              <p className="text-xs text-gray-400">Placed on</p>
+              <p className="text-sm text-gray-600">
+                {order.createdAt instanceof Date
+                  ? order.createdAt.toLocaleDateString()
+                  : "N/A"}
+              </p>
+            </div>
 
-    </div>
+            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColors(order.status)}`}>
+              {displayStatus}
+            </span>
+          </div>
+
+        </div>
+
+        {/* ── Products ── */}
+        <div className="px-5 py-4 space-y-4">
+          {order.orderItems.map((item) => (
+
+            <div key={item.id} className="flex items-center gap-4">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-16 h-16 object-cover rounded-xl border border-gray-100 shrink-0"
+              />
+
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-gray-800 truncate">{item.title}</p>
+                <p className="text-sm text-gray-400 mt-0.5">
+                  Rs {item.price} × {item.quantity}
+                </p>
+              </div>
+
+              <p className="font-semibold text-gray-700 shrink-0">
+                Rs {item.price * item.quantity}
+              </p>
+            </div>
+
+          ))}
+        </div>
+
+        {/* ── Pricing ── */}
+        <div className="border-t border-dashed border-gray-200 mx-5"></div>
+        <div className="px-5 py-4 space-y-1.5 text-sm">
+
+          <div className="flex justify-between text-gray-500">
+            <span>Subtotal</span>
+            <span>Rs {order.pricing.subtotal}</span>
+          </div>
+
+          <div className="flex justify-between text-gray-500">
+            <span>Shipping</span>
+            <span>Rs {order.pricing.shipping}</span>
+          </div>
+
+          <div className="flex justify-between font-bold text-gray-800 text-base pt-1 border-t border-gray-100 mt-1">
+            <span>Total</span>
+            <span>Rs {order.pricing.total}</span>
+          </div>
+
+        </div>
+
+        {/* ── Address + Payment ── */}
+        <div className="bg-gray-50 border-t border-gray-100 px-5 py-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+
+          <div>
+            <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Shipping Address</p>
+            <p className="text-gray-700">{order.userInfo.address}</p>
+          </div>
+
+          <div>
+            <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Payment Method</p>
+            <p className="text-gray-700 capitalize">{order.paymentMethod}</p>
+          </div>
+
+        </div>
+
+      </div>
+)
+    })}
+  </div>
+
+</div>
   );
 };
 
