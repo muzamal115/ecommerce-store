@@ -89,7 +89,7 @@ const Category = () => {
     prevArrow: <SamplePrevArrow />
   };
   return (
-    <div className='bg-[#101829] block'>
+    <div className='bg-[#101829] hidden lg:block'>
   <div className='max-w-7xl mx-auto py-7 px-4 '>
     <Slider {...settings} className='hidden md:block'>
       {categoryOnlyData.map((item, index) => (

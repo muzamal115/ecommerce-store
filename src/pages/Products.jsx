@@ -44,10 +44,10 @@ const Products = () => {
 
     }
 
-    const filteredData = data?.filter(item =>
+  const filteredData = data?.filter(item =>
   item.title.toLowerCase().includes(search.toLowerCase()) &&
-  (category === "All" || item.category === category) &&
-  (brand === "All" || item.brand === brand) &&
+  (category === "All" || item.category.toLowerCase() === category.toLowerCase()) &&
+  (brand === "All" || item.brand.toLowerCase().includes(brand.toLowerCase())) &&
   item.price > priceRange[0] &&
   item.price <= priceRange[1]
 );

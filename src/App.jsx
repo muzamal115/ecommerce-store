@@ -27,6 +27,10 @@ import Customers from './components/admin/Customers'
 import AddProduct from './components/admin/pages/AddProduct'
 import ProductDetail from './components/admin/pages/ProductDetail'
 import CustomerDetail from './components/admin/CustomerDetail'
+import Analytics from './components/admin/Analytics'
+import Login from './components/admin/Login'
+import ProtectedRoute from './auth/ProtectedRoute'
+
 
 
 
@@ -101,15 +105,21 @@ useEffect(()=>{
      </Route>
 
      {/* Admin Side */}
-     <Route path='/admin' element={<AdminLayout/>}>
+     <Route path='/login' element={<Login/>}/>
+     <Route path='/admin'
+     element={<ProtectedRoute> <AdminLayout/></ProtectedRoute>
+     }
+      >
+     {/* <Route path='/admin' element={<AdminLayout/>}> */}
      <Route index element={<Dashboard/>} />
      <Route path='products' element={<AdminProducts/>} />
      <Route path='products/:id' element={<ProductDetail/>} />
       <Route path='products/add' element={<AddProduct isEdit={false} />} /> 
       <Route path='products/edit/:id' element={<AddProduct isEdit={true} />} /> 
      <Route path='orders' element={<AdminOrders/>} />
-     <Route path='customers' element={<Customers/>} /> 
+     <Route path='customers' element={<Customers/>} />  
      <Route path='customers/:id' element={<CustomerDetail/>} /> 
+     <Route path='analytics' element={<Analytics/>} /> 
     
      </Route>
      

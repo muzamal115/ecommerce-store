@@ -24,7 +24,7 @@ const Navbar = ({location,openDropDown,toggleDropdown,getLocation}) => {
         {/* logo section */}
         <div className='flex gap-7 items-center'>
           <Link to={'/'}>
-          <h1 className='font-bold text-3xl'>  <span className='text-red-500 font-serif'>z</span>aptro </h1>
+          <h1 className='font-bold text-3xl'>  <span className='text-red-500 font-serif'>s</span>hopvrix </h1>
           </Link>
           <div className='md:flex items-center gap-1 cursor-pointer text-gray-700 hidden'>
             < MapPin className='text-red-500' />
