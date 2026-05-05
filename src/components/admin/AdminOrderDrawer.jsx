@@ -18,7 +18,7 @@ const AdminOrderDrawer = ({ orderDetail, onClose }) => {
       />
 
       {/* Drawer */}
-      <div className="top-0 fixed xl:relative right-0 z-50 md:z-0 h-full  max-w-md bg-white flex flex-col shadow-xl translate-x-0 transition-transform duration-300  ">
+      <div className="top-0 fixed xl:relative right-0 z-50 md:z-0 h-full max-w-md bg-white flex flex-col shadow-xl translate-x-0 transition-transform duration-300 print-area  ">
 
         {/* Header */}
         <div className="flex justify-between items-start p-5 border-b border-gray-100">
@@ -31,7 +31,7 @@ const AdminOrderDrawer = ({ orderDetail, onClose }) => {
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition"
+            className="p-1.5 rounded-lg border border-gray-200 text-gray-500 hover:bg-gray-50 transition no-print"
           >
             <X size={16} />
           </button>
@@ -120,14 +120,14 @@ const AdminOrderDrawer = ({ orderDetail, onClose }) => {
 
           <button
   onClick={() => window.print()}
-  className="w-full py-2.5 rounded-xl border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 transition flex items-center justify-center gap-2"
+  className="w-full py-2.5 rounded-xl border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 transition flex items-center justify-center gap-2 no-print"
 >
   <Printer size={16} />
   Print Order
 </button>
           <button
             onClick={onClose}
-            className="w-full py-2.5 rounded-xl bg-gray-900 text-white text-sm font-medium hover:bg-gray-700 transition"
+            className="w-full py-2.5 rounded-xl bg-gray-900 text-white text-sm font-medium hover:bg-gray-700 transition no-print"
           >
             Close
           </button>

@@ -2,11 +2,13 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { useUser } from '@clerk/clerk-react'
+import { useClerk } from '@clerk/clerk-react'
 
 const ProductListView = ({product}) => {
    const navigate =useNavigate()
         const{addToCart} =useCart()
         const{user}=useUser()
+        const { openSignIn } = useClerk()
    
   return (
     <div className='space-y-4 mt-2 rounded-md '>
@@ -22,7 +24,7 @@ const ProductListView = ({product}) => {
                {user ? (
    <button onClick={() => addToCart(product)} className='bg-red-500 text-white px-3 py-1 rounded-md'>Add to Cart</button>
 ) : (
-   <button onClick={() => router.push("/sign-in")} className='bg-red-500 text-white px-3 py-1 rounded-md'>
+   <button onClick={() => openSignIn()} className='bg-red-500 text-white px-3 py-1 rounded-md'>
       Login to Add
    </button>
 )}

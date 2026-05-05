@@ -15,15 +15,20 @@ const OrderSuccessCard = () => {
   //         setShow(false)
   //     }, 5000);
   //  },[])
+  const continueShopping=()=>{
+    navigate("/products")
+    setShowSuccessCard(false)
+  }
 
   const onClose=()=>{
     setShowSuccessCard(false)
+   
   }
  
   return (
 
     <div>
-      {showSuccessCard? (
+      {showSuccessCard?(
         <div className="fixed inset-0 bg-black/70  flex items-center justify-center z-50">
           {/* Card */}
           <div className="bg-white rounded-2xl shadow-2xl w-11/12 md:w-96 p-6 relative animate-fadeIn">
@@ -65,7 +70,7 @@ const OrderSuccessCard = () => {
             </p>
 
             {/* Continue Shopping Button */}
-            <button  onClick={() => navigate("/products")} className="w-full bg-red-500 cursor-pointer text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition">
+            <button  onClick={continueShopping} className="w-full bg-red-500 cursor-pointer text-white py-3 rounded-lg font-semibold hover:bg-red-600 transition">
               Continue Shopping
             </button>
           </div>

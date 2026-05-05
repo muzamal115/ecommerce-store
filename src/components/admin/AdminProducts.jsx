@@ -276,7 +276,7 @@ else{
     })
   }
 </div>
-
+{/* End mobile responsiv */}
       <Table
         columns={["Image", "Name", "Category", "Price", "Stock", "Status", "Actions"]}
       >
@@ -286,10 +286,7 @@ else{
               return(
                 
                 <AdminProductList p={p} key={i} status={status}/> 
-                  
-               
-
-              
+                              
               )
             }
           

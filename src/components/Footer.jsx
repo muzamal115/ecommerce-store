@@ -11,12 +11,12 @@ const Footer = () => {
         <div className='mb-6 md:mb-0'>
             <Link to='/'>
               {/* <img src={Logo} alt="" className='w-32'/> */}
-              <h1 className='text-red-500 text-2xl font-bold'>Zaptro</h1>
+              <h1 className='text-red-500 text-2xl font-bold'>shopvrix</h1>
             </Link>
-            <p className='mt-2 text-sm'>Powering Your World with the Best in Electronics.</p>
-            <p className='mt-2 text-sm'>123 Electronics St, Style City, NY 10001</p>
-            <p className='text-sm'>Email: support@Zaptro.com</p>
-            <p className='text-sm'>Phone: (123) 456-7890</p>
+            <p className='mt-2 text-sm'>From Fashion to Tech — We've Got It All.</p>
+            <p className='mt-2 text-sm'>Hall No: 443, Near By Tanveer Pan Shop, Narawala Road, Faisalabad</p>
+            <p className='text-sm'>Email: muzammalghafoor04@gmail.com</p>
+            <p className='text-sm'>Phone: 03017860115</p>
         </div>
         {/* customer service link */}
         <div className='mb-6 md:mb-0'>
@@ -55,7 +55,7 @@ const Footer = () => {
       </div>
       {/* bottom section */}
       <div className='mt-8 border-t border-gray-700 pt-6 text-center text-sm'>
-        <p>&copy; {new Date().getFullYear()} <span className='text-red-500'>Zaptro</span>. All rights reserved</p>
+        <p>&copy; {new Date().getFullYear()} <span className='text-red-500'>shopvrix</span>. All rights reserved</p>
       </div>
     </footer>
   )

@@ -110,7 +110,8 @@ export const DataProvider = ({ children }) => {
     
     const docRef = doc(firestore, "products", id);
     const result = await getDoc(docRef);
-    return result;
+   const allData= {id:result.id,...result.data()}
+    return allData;
   };
 
   const updatePrices = async () => {

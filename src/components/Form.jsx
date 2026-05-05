@@ -9,10 +9,12 @@ import { useUser } from "@clerk/clerk-react";
 
 
 import { useOrdersData } from "../context/OrderContext";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 const Form = ({ cartItems, pricing }) => {
   const { user } = useUser();
+ const navigate= useNavigate()
 
   const [name, setName] = useState(user ? user.fullName : "");
   const [email, setEmail] = useState(
@@ -24,11 +26,14 @@ const Form = ({ cartItems, pricing }) => {
   const [postCode, setPostCode] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [selectedPayment, setSelectedPayment] = useState("cod");
+  const[loading,setLaoding]=useState(false)
+  
 
-  const { placeOrder ,orderSuccess} = useOrdersData();
+  const { placeOrder ,orderSuccess,showSuccessCard} = useOrdersData();
 
   const orderSubmit = (e) => {
     e.preventDefault();
+    setLaoding(true)
     const userFormData = {
       name,
       email,
@@ -38,6 +43,8 @@ const Form = ({ cartItems, pricing }) => {
       phoneNumber,
     };
     placeOrder(user, cartItems, userFormData, pricing, selectedPayment);
+    setLaoding(false)
+    navigate('/orders')
 
     console.log("Order placed");
   };
@@ -256,8 +263,9 @@ const Form = ({ cartItems, pricing }) => {
         <button
           type="submit"
           className="bg-red-500 w-full text-white py-3 rounded-md mt-4 cursor-pointer text-lg font-semibold hover:bg-red-600 transition"
+          disabled={loading}
         >
-          Place Order
+         {loading?'Wait..':'Place Order'} 
         </button>
       </form>
     </div>

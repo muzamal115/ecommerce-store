@@ -7,6 +7,7 @@ import Pagination from '../components/Pagination'
 import Lottie from 'lottie-react'
 import notfound from '../assets/notfound.json'
 import MobileFilter from '../components/MobileFilter'
+import Chatbot from '../components/Chatbot'
 
 
 const Products = () => {
@@ -17,9 +18,12 @@ const Products = () => {
     const[priceRange,setPriceRange]=useState([0,500000])
     const[page,setPage]=useState(1)
     const[openFilter,setOpenFilter]=useState(false)
+
+    
+    
     useEffect(()=>{
    fetchAllProducts()
-    },[data])
+    },[])
    
      
     useEffect(() => {
@@ -52,10 +56,19 @@ const Products = () => {
   item.price <= priceRange[1]
 );
 
+const handleAIResponse = (filters) => {
+ 
+  if (filters.category) setCategory(filters.category||'All')
+  if (filters.brand) setBrand(filters.brand||'All')
+  if (filters.maxPrice) setPriceRange([0, filters.maxPrice])
+  if (filters.minPrice) setPriceRange([filters.minPrice||0, filters.maxPrice || 500000])
+}
+
 const dynamicPage=Math.ceil(filteredData?.length/12)
 
 
   return (
+    <div>
     <div >
       <MobileFilter openFilter={openFilter} setOpenFilter={setOpenFilter} search={search} setSearch={setSearch}
       category={category} setCategory={setCategory}
@@ -106,7 +119,7 @@ const dynamicPage=Math.ceil(filteredData?.length/12)
 
     </div>
       ):(
-        <div className='flex justify-center items-center mt-10 md:h-[600px] md:w-[900px] border'>
+        <div className='flex justify-center items-center mt-10 md:h-[600px] md:w-[900px] '>
      <Lottie animationData={notfound} classID='w-[500px]'/>
         </div>
       )
@@ -128,6 +141,8 @@ const dynamicPage=Math.ceil(filteredData?.length/12)
       </div>
 
 
+    </div>
+    <Chatbot onFiltersExtracted={handleAIResponse} />
     </div>
   )
 }

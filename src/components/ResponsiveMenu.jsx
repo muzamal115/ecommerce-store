@@ -7,7 +7,7 @@ const ResponsiveMenu = ({openNav,setOpenNav}) => {
      const{user}=useUser()
   return (
     <div className={`${openNav?'left-0':'-left-[-100%]'} fixed bottom-0 top-0 flex flex-col h-screen z-20 w-[75%]  bg-white px-8 pb-6 pt-16 text-black md:hidden rounded-r-xl shadow-md transition-all `}>
-   <div className="border flex items-center  gap-3">
+   <div className=" flex items-center  gap-3">
     {
       user?<UserButton size={50}/>:<FaUserCircle size={50}/>
     }
@@ -23,6 +23,10 @@ const ResponsiveMenu = ({openNav,setOpenNav}) => {
             <Link to={'/products'} onClick={()=>setOpenNav(false)} ><li>Products</li></Link>
             <Link to={'/about'} onClick={()=>setOpenNav(false)}><li>About</li></Link>
             < Link to={'/contact'} onClick={()=>setOpenNav(false)}><li>Contact</li></Link>
+              {
+                   user?
+                  < Link to={'/orders'} onClick={()=>setOpenNav(false)}><li>My Orders</li></Link>:''
+                        }
             
           </ul>
 

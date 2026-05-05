@@ -3,13 +3,16 @@ import { IoCartOutline } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext';
 import { useUser } from '@clerk/clerk-react'
+import { useClerk } from '@clerk/clerk-react'
+
+
 
 const ProductCard = ({product}) => {
-    //  console.log(product.id);
+    //  console.log(product);
     const{user}=useUser()
     // console.log(user);
     
-
+const { openSignIn } = useClerk()
     
     
    const navigate=useNavigate()
@@ -37,7 +40,7 @@ return (
       {user ? (
    <button onClick={() => addToCart(product)} className='bg-red-500 md:px-3 px-1 py-2 mt-2 text-lg rounded-md text-white w-full flex gap-1 md:gap-2 justify-center items-center font-semibold'>Add to Cart</button>
 ) : (
-   <button onClick={() => router.push("/sign-in")} className='bg-red-500 md:px-3 px-1 py-2 mt-2 text-lg rounded-md text-white w-full flex gap-1 md:gap-2 justify-center items-center font-semibold'>
+   <button onClick={() => openSignIn()} className='bg-red-500 md:px-3 px-1 py-2 mt-2 text-lg rounded-md text-white w-full flex gap-1 md:gap-2 justify-center items-center font-semibold'>
       Login to Add
    </button>
 )}

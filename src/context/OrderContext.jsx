@@ -4,10 +4,13 @@ import { firebaseApp } from "./Firebase";
 import { useCart } from "./CartContext";
 import { toast } from "react-toastify";
 
+
 export const OrderContext = createContext();
 const firestore = getFirestore(firebaseApp);
+ 
 
 export const OrderProvider = ({ children }) => {
+ 
   const [showSuccessCard, setShowSuccessCard] = useState(false);
   const [orderId,setOrderId]=useState()
   const[orders,setOrders]=useState([])
@@ -83,6 +86,8 @@ function generateOrderID() {
     console.log("Cart is clear");
     
  setShowSuccessCard(true)
+ 
+
 
   } catch (error) {
     console.log("Error placing order:", error);

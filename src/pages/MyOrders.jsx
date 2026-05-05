@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import OrderSuccessCard from "../components/OrderSuccessCard";
 
 
 
@@ -8,6 +9,10 @@ const MyOrders = ({orders}) => {
   const sortedOrders=orders.sort((a,b)=>{
     return b.createdAt-a.createdAt
   })
+
+ useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   
 const statusColors=(status) => {
   const s= status=='pending'?'placed':status
@@ -29,6 +34,8 @@ const statusColors=(status) => {
      </div>
       ); }
   return (
+    <>
+    <OrderSuccessCard/>
     <div className="max-w-4xl mx-auto px-4 py-8">
 
   <h1 className="text-2xl font-bold text-gray-800 mb-8">My Orders</h1>
@@ -76,9 +83,9 @@ const statusColors=(status) => {
 
         {/* ── Products ── */}
         <div className="px-5 py-4 space-y-4">
-          {order.orderItems.map((item) => (
+          {order.orderItems.map((item,i) => (
 
-            <div key={item.id} className="flex items-center gap-4">
+            <div key={i} className="flex items-center gap-4">
               <img
                 src={item.image}
                 alt={item.title}
@@ -142,7 +149,7 @@ const statusColors=(status) => {
   </div>
 
 </div>
-  );
+ </> );
 };
 
 export default MyOrders;

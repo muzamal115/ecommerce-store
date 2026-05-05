@@ -26,13 +26,14 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 w-full max-w-sm">
-
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 w-full max-w-sm  ">
+    
+          <h1 className='text-black font-semibold text-xl  mb-2'><span className='text-red-500'>s</span>hopvrix</h1>
         {/* Header */}
-        <div className="mb-8">
-          <div className="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
-            <span className="text-indigo-600 text-lg">🛒</span>
-          </div>
+        <div className="mb-8  text-center">
+         
+          
+          
           <h1 className="text-xl font-bold text-gray-800">Admin Login</h1>
           <p className="text-sm text-gray-400 mt-1">Sign in to your dashboard</p>
         </div>

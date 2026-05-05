@@ -12,11 +12,20 @@ input{
 }
 
 @media print {
-  * { 
-    display: none !important; 
+  body * {
+    visibility: hidden;
   }
-  .drawer-print,
-  .drawer-print * { 
-    display: revert !important; 
+  .print-area, .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+@media print {
+  .no-print {
+    display: none;
   }
 }
