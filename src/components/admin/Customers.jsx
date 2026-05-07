@@ -257,8 +257,8 @@ else{
 
   {
 
-filteredCustomers?.slice(page*itemsPerPage-itemsPerPage,page*itemsPerPage).map((c)=>{
-  return  <CustomersList c={c}/>
+filteredCustomers?.slice(page*itemsPerPage-itemsPerPage,page*itemsPerPage).map((c,i)=>{
+  return  <CustomersList key={i} c={c}/>
 })
 
 

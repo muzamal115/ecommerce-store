@@ -24,7 +24,7 @@ const Dashboard = () => {
       if(!users||users.length===0||!data||data.length===0||!ordersData||ordersData.length===0) return
     const stats=getStoreOverview(data,ordersData,users)
     setStatsData(stats)
-    console.log(stats);
+    
     
 
     },[users,data,ordersData])
@@ -158,8 +158,8 @@ return <LoadingSpinner/>
         <Table columns={["OrderID","Customer","Date", "Total", "Status"]}>
 
           {
-            filteredOrders?.slice(0,5)?.map((order)=>{
-             return <DashboardNewCustomerList order={order} />
+            filteredOrders?.slice(0,5)?.map((order,i)=>{
+             return <DashboardNewCustomerList key={i} order={order} />
             })
           }
          

@@ -12,7 +12,7 @@ const ProductDetail = () => {
   const navigate=useNavigate()
        
 
-  const{getSingleProduct,deleteProduct}=getData()
+  const{getSingleProduct,deleteProduct,data}=getData()
 
     const handleDelete=async()=>{
   
@@ -30,10 +30,10 @@ const ProductDetail = () => {
         }
 
   useEffect(()=>{
-    getSingleProduct(id).then((value)=>setProduct(value.data()))
+    getSingleProduct(id).then((value)=>setProduct(value))
     
   
-  },[])
+  },[getSingleProduct,id])
 
   useEffect(()=>{
 
@@ -72,7 +72,7 @@ const originalPrice = Math.round(
         {/* ✅ Image Section */}
         <div>
           <img
-            src={image}
+            src={image||null}
             alt={product.title}
             className="w-full h-[300px] md:h-[400px] object-cover rounded-2xl"
           />

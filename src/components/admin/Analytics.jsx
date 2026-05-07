@@ -45,7 +45,7 @@ ordersData.forEach((o) => {
   name: key,
   orders: ordersPerMonth[key],
 }));
-console.log(ordersCharts);
+
 
 setOrdersChartData(ordersCharts)
 

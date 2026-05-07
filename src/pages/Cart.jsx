@@ -14,6 +14,7 @@ import OrderSuccessCard from "../components/OrderSuccessCard";
 const Cart = ({ location, getLocation }) => {
   const { user } = useUser();
   const navigate = useNavigate();
+  const[promoCodeMessage,setPromoCodeMessage]=useState("")
 
   const { cartItems, updateQuantity, deleteItem, fetchCart } = useCart();
 
@@ -35,10 +36,13 @@ const Cart = ({ location, getLocation }) => {
       fetchCart();
     }
   }, [user]);
+  const handlePromoCode=()=>{
+    setPromoCodeMessage("Invalid! promo code")
+  }
 
   return (
     <div>
-      <OrderSuccessCard />
+      {/* <OrderSuccessCard /> */}
 
       <div className="mt-10 max-w-6xl mx-auto mb-5 md:px-0 px-4">
         {cartItems?.length > 0 ? (
@@ -139,13 +143,16 @@ const Cart = ({ location, getLocation }) => {
                     <h1 className="font-semibold text-gray-700 mb-3 mt-7">
                       Apply Promo Code
                     </h1>
+                    <p className="text-red-500  font-semibod mb-2">{promoCodeMessage}</p>
                     <div className="flex gap-3">
                       <input
                         type="text"
                         placeholder="Enter code"
                         className="p-2 rounded-md w-full"
                       />
-                      <button className="bg-white text-black border border-gray-200 px-4 cursor-pointer py-1 rounded-md">
+                      <button className="bg-white text-black border border-gray-200 px-4 cursor-pointer py-1 rounded-md"
+                      onClick={handlePromoCode}
+                      >
                         Apply{" "}
                       </button>
                     </div>

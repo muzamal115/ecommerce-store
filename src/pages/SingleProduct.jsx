@@ -22,7 +22,7 @@ const SingleProduct = () => {
 useEffect(() => {
   getSingleProduct(id).then((value) => {
    
-    console.log(value)
+   
    
     setSingleProduct(value)
     

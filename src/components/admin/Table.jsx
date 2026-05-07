@@ -27,8 +27,8 @@ const Table = ({columns,children}) => {
           <thead>
             <tr className="text-left border-b bg-gray-100 border-gray-300">
              
-             {columns.map((col)=>(
-              <th className="p-2  ">{col}</th>
+             {columns.map((col,i)=>(
+              <th className="p-2  " key={i}>{col}</th>
              ))} 
               
             </tr>

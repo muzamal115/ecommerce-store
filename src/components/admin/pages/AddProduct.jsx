@@ -96,7 +96,7 @@ const AddProduct = ({isEdit}) => {
 
        } 
 
-   console.log("Final data is :",updatedData);
+   
 
       if(isEdit){
        await updateProduct(updatedData,id)

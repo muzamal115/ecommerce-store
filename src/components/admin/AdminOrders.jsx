@@ -302,8 +302,8 @@ else{
               }
               >
                 {
-                  filteredOrders?.slice(page*itemsPerPage-itemsPerPage,page*itemsPerPage).map((order)=>{
-                    return  <AdminOrdersList order={order} orderDetail={orderDetail} statusOptions={statusOptions} setOrderDetail={setOrderDetail} />
+                  filteredOrders?.slice(page*itemsPerPage-itemsPerPage,page*itemsPerPage).map((order,i)=>{
+                    return  <AdminOrdersList key={i} order={order}  orderDetail={orderDetail} statusOptions={statusOptions} setOrderDetail={setOrderDetail} />
                   })
                 }
 
