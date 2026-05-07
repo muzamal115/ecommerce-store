@@ -4,7 +4,7 @@ import { Package, CheckCircle, XCircle, AlertTriangle, Trash } from "lucide-reac
 import { getData } from '../../context/DataContext';
 import AddProduct from './pages/AddProduct';
 import { useNavigate } from 'react-router-dom';
-import AdminProductList from './AdminProductLIst';
+import AdminProductList from './AdminProductList';
 import AdminPagination from "./AdminPagination";
 import { Eye, Edit2, Trash2,Search } from "lucide-react";
 import LoadingSpinner from './LoadingSpinner';
