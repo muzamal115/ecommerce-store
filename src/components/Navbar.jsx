@@ -16,6 +16,7 @@ const Navbar = ({location,openDropDown,toggleDropdown,getLocation}) => {
     const{cartItems}=useCart()
     const[openNav,setOpenNav]=useState(false)
      const{user}=useUser()
+     
   
   
   return (

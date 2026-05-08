@@ -88,14 +88,14 @@ const Carousel = () => {
 
   return (
     <div>
-      <Slider {...settings}>
+      <Slider {...settings} className=''>
         {data?.slice(101, 108)?.map((item, index) => (
           <div
             key={index}
-            className="bg-gradient-to-r from-[#060c29] via-[#302b63] to-[#24243e] z-0"
+            className="bg-gradient-to-r from-[#060c29] via-[#302b63] to-[#24243e] z-0 "
           >
-            <div className="flex flex-col md:flex-row gap-10 justify-center  md:justify-around h-[600px] items-center px-4  my-20 md:my-0">
-              <div className="md:space-y-6 space-y-3 text-center md:text-left  ">
+            <div className="flex flex-col md:flex-row gap-10 justify-center  md:justify-around h-[600px] items-center px-4  my-20 md:my-0 ">
+              <div className="md:space-y-6 space-y-3 text-center md:text-left order-2 md:order-1  ">
                 <h3 className="text-red-500 font-semibold font-sans text-sm">
                   Powering Your World with the best in Shopping
                 </h3>
@@ -113,7 +113,7 @@ const Carousel = () => {
                 </button>
               </div>
 
-              <div >
+              <div className='order-1 md:order-2' >
                 <img
                   src={item.images[0]}
                   alt={item.title}

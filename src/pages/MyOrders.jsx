@@ -65,7 +65,7 @@ const statusColors=(status) => {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="text-right">
+            <div className="md:text-right text-left">
               <p className="text-xs text-gray-400">Placed on</p>
               <p className="text-sm text-gray-600">
                 {order.createdAt instanceof Date

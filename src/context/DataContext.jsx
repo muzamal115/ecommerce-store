@@ -29,6 +29,7 @@ export const DataProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [isAdding,setIsAdding]=useState(false)
   const[users,setUsers]=useState([])
+  
 
 
   const getUniqueCategory = (data, property) => {
@@ -395,7 +396,8 @@ return stats
         fetchUsers,
         calculateCustomerStats,
         getuserStats,
-        getStoreOverview
+        getStoreOverview,
+        
       
       }}
     >

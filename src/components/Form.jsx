@@ -94,8 +94,8 @@ const Form = ({ cartItems, pricing }) => {
           />
         </div>
 
-        <div className="flex w-full gap-5">
-          <div className="flex flex-col space-y-1 w-full">
+        <div className=" w-full md:gap-5 md:flex ">
+          <div className="flex flex-col space-y-1 w-full mb-2 md:mb-0">
             <label htmlFor="">City</label>
             <input
               type="text"
@@ -121,8 +121,8 @@ const Form = ({ cartItems, pricing }) => {
           </div>
         </div>
 
-        <div className="flex w-full gap-5">
-          <div className="flex flex-col space-y-1 w-full">
+        <div className="md:flex w-full md:gap-5">
+          <div className="flex flex-col space-y-1 w-full mb-2 md:mb-0">
             <label htmlFor="">Country</label>
             <select
               value={country}

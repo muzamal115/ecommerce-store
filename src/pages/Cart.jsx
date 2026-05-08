@@ -96,11 +96,13 @@ const Cart = ({ location, getLocation }) => {
                   );
                 })}
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-20 gap-5">
    
              {/* User Form */}
-
-                <Form cartItems={cartItems} pricing={pricing} />
+                  <div className="md:order-1 order-2">
+             <Form cartItems={cartItems} pricing={pricing}  />
+                  </div>
+               
 
 
                 <div className="bg-white border border-gray-100 shadow-xl p-7 rounded-md mt-4 space-y-2 h-max order-1 md:order-2">
