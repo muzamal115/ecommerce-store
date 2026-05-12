@@ -52,16 +52,15 @@ const Products = () => {
   item.title.toLowerCase().includes(search.toLowerCase()) &&
   (category === "All" || item.category.toLowerCase() === category.toLowerCase()) &&
   (brand === "All" || item.brand.toLowerCase().includes(brand.toLowerCase())) &&
-  item.price > priceRange[0] &&
+  item.price >= priceRange[0] &&
   item.price <= priceRange[1]
 );
 
 const handleAIResponse = (filters) => {
- 
-  if (filters.category) setCategory(filters.category||'All')
-  if (filters.brand) setBrand(filters.brand||'All')
-  if (filters.maxPrice) setPriceRange([0, filters.maxPrice])
-  if (filters.minPrice) setPriceRange([filters.minPrice||0, filters.maxPrice || 500000])
+  setSearch(filters.keyword || '')
+  setCategory(filters.category || 'All')
+  setBrand(filters.brand || 'All')
+  setPriceRange([filters.minPrice ?? 0, filters.maxPrice ?? 500000])
 }
 
 const dynamicPage=Math.ceil(filteredData?.length/12)

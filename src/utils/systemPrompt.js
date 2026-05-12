@@ -12,19 +12,23 @@ Return this exact JSON format:
 {
   "category": "All",
   "brand": "All",
-  "maxPrice": 0,
-  "minPrice": 500000,
+  "minPrice":0,
+  "maxPrice":  500000,
+  
   "keyword": ""
 }
 
 Rules:
 - category aur brand allowed list mein se hi hona chahiye — exact spelling
-- Agar category match na ho toh "All" return karo — null ya empty nahi
-- Agar brand match na ho toh "All" return karo — null ya empty nahi
+- Agar category match na ho toh "All" return karo
+- Agar brand match na ho toh "All" return karo
 - maxPrice na ho toh 500000 return karo
 - minPrice na ho toh 0 return karo
 - maxPrice aur minPrice hamesha number hona chahiye
-- keyword user ka main search word hoga
+- keyword hamesha singular hona chahiye — "phones" nahi "phone", "shoes" nahi "shoe"
+- keyword sirf ek word hoga — multiple words nahi
+- PRIORITY RULE: Agar category ya brand se products mil sakti hain toh keyword EMPTY rakho — keyword sirf tab use karo jab category aur brand dono "All" hon
+- Agar keyword use karo toh category aur brand dono "All" hi rakhna — unhe select mat karo
 - Sirf JSON return karo — kuch aur nahi
 `;
 
