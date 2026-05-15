@@ -89,12 +89,12 @@ const Category = () => {
     prevArrow: <SamplePrevArrow />
   };
   return (
-    <div className='bg-[#101829] hidden lg:block'>
+    <div className='bg-[#101829] hidden lg:block '>
   <div className='max-w-7xl mx-auto py-7 px-4 '>
-    <Slider {...settings} className='hidden md:block'>
+    <Slider {...settings} className='hidden md:block  '>
       {categoryOnlyData.map((item, index) => (
         <div key={index} className="px-3 whitespace-nowrap ">
-          <button onClick={()=>navigate(`/category/${item}`)} className='uppercase bg-gradient-to-r from-red-500 to-purple-500 text-white px-3 py-1 rounded-md cursor-pointer'>
+          <button onClick={()=>navigate(`/category/${item}`)} className='uppercase bg-gradient-to-r from-red-500 to-purple-500 text-white px-3 py-1 rounded-md cursor-pointer truncate w-[100px]'>
             {item}
           </button>
         </div>
