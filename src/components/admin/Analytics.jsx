@@ -83,11 +83,14 @@ useEffect(() => {
 
   const statusCount = {};
 
-  ordersData.forEach((o) => {
-    const status = o.status?.toLowerCase() || "unknown";
-
+ordersData.forEach((o) => {
+    const rawStatus = o.status?.toLowerCase() || "unknown";
+    
+    // placed aur pending dono ko "pending" treat karo
+    const status = rawStatus === "placed" ? "pending" : rawStatus;
+    
     statusCount[status] = (statusCount[status] || 0) + 1;
-  });
+});
 
   const statusChartData = Object.keys(statusCount).map((key) => ({
     name: key,

@@ -11,22 +11,7 @@ const CategoryProduct = () => {
   const[searchData,setSearchData]=useState([])
     const navigate=useNavigate()
     const{fetchProductsByCategory}=getData()
-// const filterData=async()=>{
 
-//     try {
-//      const res=   await axios.get(`https://dummyjson.com/products/category/${category}`)
-//      console.log(res.data.products);
-//      const data=res.data.products
-//      setSearchData(data)
-     
-        
-//     } catch (error) {
-//         console.log(error);
-        
-        
-//     }
-         
-// }
 
 const filterData=()=>{
 

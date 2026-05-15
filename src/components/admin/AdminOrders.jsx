@@ -35,9 +35,11 @@ const onClose=()=>{
       // Start Filter Data logic  
   
     const filteredOrders=ordersData?.filter((order)=>{
+      const normalizedStatus =
+  order.status === "placed" ? "pending" : order.status;
     
       const matchesSearch=order.userInfo.name.toLowerCase().includes(search.toLowerCase())
-      const matchesStatus= statusFilter=='all'|| order.status===statusFilter
+     const matchesStatus =statusFilter === "all" || normalizedStatus === statusFilter;
         
       return matchesSearch&&matchesStatus  
      
@@ -86,13 +88,13 @@ const onClose=()=>{
   },
   {
     title: "Pending",
-    value: statsData?.pending, 
+    value: statsData?.placed, 
     icon: Clock,
     color: "text-yellow-600 bg-yellow-100",
   },
   {
     title: "Failed ",
-    value: statsData?.failed, // 
+    value: statsData?.cancelled, // 
     icon: XCircle,
     color: "text-red-600 bg-red-100",
   },
@@ -215,7 +217,7 @@ else{
                 
               >
                 <option value="all" >All</option>
-                <option value='placed'>Pending </option>
+                <option value='pending'>Pending</option>
                 <option  value='processing'>Processing</option>
                 <option  value='shipped'>Shipped</option>
                 <option  value='delivered'>Delivered</option>

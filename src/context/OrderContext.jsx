@@ -159,40 +159,29 @@ const fetchAllOrders=async()=>{
   
 // Calculate All order states placed → processing → shipped → delivered ->   cancelled
 
- const calculateOrderStats=(orderData)=>{
-       
-       
- let stats={
-  totalOrders:orderData?.length,
-  placed:0,
-  pending:0,
-  shipped:0,
-  delivered:0,
-  failed:0
- }
-
- orderData?.forEach((data)=>{
-  if(data.status=='placed'){
-    stats.pending++
-  }
-  
-   else if(data.status=='shipped'){
-    stats.shipped++
+const calculateOrderStats = (orderData) => {
+  let stats = {
+    totalOrders: orderData?.length,
+    placed: 0,
+    shipped: 0,
+    delivered: 0,
+    cancelled: 0,
   }
 
-  else if(data.status=='delivered'){
-    stats.delivered++
-  }
-  else{
-    stats.failed++
-  }
-  
-  
- })
+  orderData?.forEach((data) => {
+    if (data.status === 'placed'||data.status === 'pending') {
+      stats.placed++
+    } else if (data.status === 'shipped') {
+      stats.shipped++
+    } else if (data.status === 'delivered') {
+      stats.delivered++
+    } else if (data.status === 'cancelled') {
+      stats.cancelled++
+    }
+  })
 
- return stats
-
- }
+  return stats
+}
 
 //  update status
 

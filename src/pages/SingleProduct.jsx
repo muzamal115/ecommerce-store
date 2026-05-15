@@ -109,7 +109,7 @@ useEffect(() => {
               </div>
 
               {/* Quantity */}
-              <div className='flex items-center gap-3'>
+              {/* <div className='flex items-center gap-3'>
                 <label className='text-sm font-medium text-gray-700'>Quantity:</label>
                 <input
                   className='w-20 border border-gray-300 rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-red-400 focus:border-red-400 transition-all text-sm'
@@ -119,7 +119,7 @@ useEffect(() => {
                   max={singleProduct.stock}
                   onChange={(e) => setProductQuantity(e.target.value)}
                 />
-              </div>
+              </div> */}
 
               {/* Button */}
               <div className='mt-2'>
