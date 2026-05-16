@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import easypaisa_logo  from '../assets/easypaisa-logo.png'
+import jazzcash_logo  from '../assets/jazzcash-logo.png'
+import mastercard_visa_card_logo  from '../assets/mastercard-visa-card-logo.png'
 import {
   FaMoneyBillWave,
   FaCreditCard,
@@ -154,82 +157,76 @@ const Form = ({ cartItems, pricing }) => {
         <h1 className="text-gray-800 font-bold text-lg mt-5">Payment Method</h1>
         <div className="flex flex-col space-y-2 mt-2">
           {/* Cash on Delivery */}
-          <label
-            className="flex items-center space-x-2 p-2 border rounded-md cursor-pointer hover:bg-gray-50"
-            onClick={() => setSelectedPayment("cod")}
-          >
-            <input
-              type="radio"
-              name="payment"
-              value="cod"
-              checked={selectedPayment === "cod"}
-              onChange={() => setSelectedPayment("cod")}
-              className="accent-red-500"
-            />
-            <FaMoneyBillWave className="text-red-500" />
-            <span>Cash on Delivery</span>
-          </label>
+         <label
+  className="flex items-center space-x-2 p-2 border rounded-md cursor-pointer hover:bg-gray-50"
+  onClick={() => setSelectedPayment("cod")}
+>
+  <input
+    type="radio"
+    name="payment"
+    value="cod"
+    checked={selectedPayment === "cod"}
+    onChange={() => setSelectedPayment("cod")}
+    className="accent-red-500"
+  />
+  <FaMoneyBillWave className="text-red-500 text-xl" />
+  <span>Cash on Delivery</span>
+</label>
 
           {/* EasyPaisa */}
           <label
-            className="flex items-center space-x-2 p-2 border rounded-md cursor-pointer hover:bg-gray-50"
-            onClick={() => {
-              setSelectedPayment("easypaisa");
-              window.open("https://www.easypaisa.com.pk", "_blank");
-            }}
-          >
-            <input
-              type="radio"
-              name="payment"
-              value="easypaisa"
-              checked={selectedPayment === "easypaisa"}
-              onChange={() => {
-                setSelectedPayment("easypaisa");
-                window.open("https://www.easypaisa.com.pk", "_blank");
-              }}
-              className="accent-red-500"
-            />
-            <FaMobileAlt className="text-green-600" />
-            <span>EasyPaisa</span>
-          </label>
+  className="flex items-center space-x-2 p-2 border rounded-md cursor-pointer hover:bg-gray-50"
+  onClick={() => {
+    setSelectedPayment("easypaisa");
+    window.open("https://www.easypaisa.com.pk", "_blank");
+  }}
+>
+  <input
+    type="radio"
+    name="payment"
+    value="easypaisa"
+    checked={selectedPayment === "easypaisa"}
+    onChange={() => setSelectedPayment("easypaisa")}
+    className="accent-red-500"
+  />
+  <img src={easypaisa_logo} alt="EasyPaisa" className="h-6 w-auto object-contain" />
+  <span>EasyPaisa</span>
+</label>
 
           {/* JazzCash */}
           <label
-            className="flex items-center space-x-2 p-2 border rounded-md cursor-pointer hover:bg-gray-50"
-            onClick={() => {
-              setSelectedPayment("jazzcash");
-              window.open("https://www.jazzcash.com.pk", "_blank");
-            }}
-          >
-            <input
-              type="radio"
-              name="payment"
-              value="jazzcash"
-              checked={selectedPayment === "jazzcash"}
-              onChange={() => {
-                setSelectedPayment("jazzcash");
-                window.open("https://www.jazzcash.com.pk", "_blank");
-              }}
-              className="accent-red-500"
-            />
-            <FaWallet className="text-blue-600" />
-            <span>JazzCash</span>
-          </label>
+  className="flex items-center space-x-2 p-2 border rounded-md cursor-pointer hover:bg-gray-50"
+  onClick={() => {
+    setSelectedPayment("jazzcash");
+    window.open("https://www.jazzcash.com.pk", "_blank");
+  }}
+>
+  <input
+    type="radio"
+    name="payment"
+    value="jazzcash"
+    checked={selectedPayment === "jazzcash"}
+    onChange={() => setSelectedPayment("jazzcash")}
+    className="accent-red-500"
+  />
+  <img src={jazzcash_logo} alt="JazzCash" className="h-6 w-auto object-contain" />
+  <span>JazzCash</span>
+</label>
 
           {/* Debit/Credit Card */}
           <label className="flex flex-col border rounded-md p-2 cursor-pointer hover:bg-gray-50">
-            <div className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="payment"
-                value="card"
-                checked={selectedPayment === "card"}
-                onChange={() => setSelectedPayment("card")}
-                className="accent-red-500"
-              />
-              <FaCreditCard className="text-gray-700" />
-              <span>Debit / Credit Card</span>
-            </div>
+  <div className="flex items-center space-x-2">
+    <input
+      type="radio"
+      name="payment"
+      value="card"
+      checked={selectedPayment === "card"}
+      onChange={() => setSelectedPayment("card")}
+      className="accent-red-500"
+    />
+    <img src={mastercard_visa_card_logo} alt="Card" className="h-6 w-auto object-contain" />
+    <span>Debit / Credit Card</span>
+  </div>
 
             {/* Expandable card form */}
             {selectedPayment === "card" && (
