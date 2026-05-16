@@ -29,18 +29,23 @@ export const CartProvider = ({ children }) => {
     const itemInCart = cartItems.find((item) => item.id === product.id);
     try {
       const itemRef=doc(firestore,'users',user.id,'cart',product.id)
-
-      if (itemInCart) {
-      const updatedCart = cartItems.map((item) =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      );
-
-      setCartItems(updatedCart);
-      await updateDoc(itemRef,{quantity:itemInCart.quantity+1})
-      toast.success("Quantity increased")
-    } else {
+if (itemInCart) {
+  // stock aur max 5 check
+  const maxAllowed = Math.min(5, itemInCart.stock || 5)
+  if (itemInCart.quantity >= maxAllowed) {
+    toast.warning(`Maximum ${maxAllowed} items allowed`)
+    return;
+  }
+  
+  const updatedCart = cartItems.map((item) =>
+    item.id === product.id
+      ? { ...item, quantity: item.quantity + 1 }
+      : item
+  );
+  setCartItems(updatedCart);
+  await updateDoc(itemRef, { quantity: itemInCart.quantity + 1 })
+  toast.success("Quantity increased")
+} else {
         // Add new Product
       setCartItems([...cartItems, { ...product, quantity: 1 }]);
       await setDoc(itemRef, { ...product,  quantity: 1 })
@@ -70,10 +75,14 @@ export const CartProvider = ({ children }) => {
             newUnit=newUnit-1
           
           };
-          if (action === "increase"){
-             newUnit=newUnit+1;
-              
-          } 
+          if (action === "increase") {
+  const maxAllowed = Math.min(5, item.stock || 5)
+  if (item.quantity >= maxAllowed) {
+    toast.warning(`Maximum ${maxAllowed} items allowed`)
+    return item; // change mat karo
+  }
+  newUnit = newUnit + 1;
+}
          
 
           if (newUnit <= 0) return null; // remove item
