@@ -33,10 +33,18 @@ const Footer = () => {
         <div className='mb-6 md:mb-0'>
             <h3 className='text-xl font-semibold'>Follow Us</h3>
             <div className='flex space-x-4 mt-2'>
-                <FaFacebook/>
-                <FaInstagram/>
-                <FaTwitterSquare/>
-                <FaPinterest/>
+               <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
+  <FaFacebook className='cursor-pointer'/>
+</a>
+<a href="https://www.instagram.com" target="_blank" rel="noreferrer">
+  <FaInstagram className='cursor-pointer'/>
+</a>
+<a href="https://www.twitter.com" target="_blank" rel="noreferrer">
+  <FaTwitterSquare className='cursor-pointer'/>
+</a>
+<a href="https://www.pinterest.com" target="_blank" rel="noreferrer">
+  <FaPinterest className='cursor-pointer'/>
+</a>
             </div>
         </div>
         {/* newsletter subscription */}

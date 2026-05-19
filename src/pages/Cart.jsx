@@ -15,30 +15,55 @@ const Cart = ({ location, getLocation }) => {
   const { user } = useUser();
   const navigate = useNavigate();
   const[promoCodeMessage,setPromoCodeMessage]=useState("")
+  const [promoCode, setPromoCode] = useState("")
+  const [promoDiscount, setPromoDiscount] = useState(0)
 
   const { cartItems, updateQuantity, deleteItem, fetchCart } = useCart();
+
+  // Valid promo codes
+const validCodes = {
+  "SHOPVRIX10": 10,
+  "SAVE10": 10,
+  "FYP2026": 10,
+}
+
+
 
   //  console.log(cart);
   const subtotal =
     cartItems?.reduce((acc, item) => acc + item.price * item.quantity, 0) || 0;
   const shipping = 200; // example logic
   const discount = 0; // add if you want
-  const total = subtotal + shipping - discount;
+  const total = subtotal + shipping - promoDiscount;
   const pricing = {
     subtotal,
     shipping,
-    discount,
+    discount:promoDiscount,
     total,
   };
+
+  const handlePromoCode=()=>{
+  const code=promoCode.toUpperCase().trim()
+  if(validCodes[code]){
+    const discountPercent=validCodes[code]
+    const discountAmount=Math.round(subtotal*discountPercent/100)
+    setPromoDiscount(discountAmount)
+    setPromoCodeMessage(`✅ Promo code applied! ${discountPercent}% off`)
+    
+  }
+  else{
+    setPromoCode(0)
+    setPromoCodeMessage("❌ Invalid promo code")
+  }
+
+}
 
   useEffect(() => {
     if (user) {
       fetchCart();
     }
   }, [user]);
-  const handlePromoCode=()=>{
-    setPromoCodeMessage("Invalid! promo code")
-  }
+
 
   return (
     <div>
@@ -131,11 +156,14 @@ const Cart = ({ location, getLocation }) => {
                     </p>
                   </div>
 
-                  {/* <div className="flex justify-between items-center">
-                <h1 className='flex gap-1 items-center text-gray-700'><span><GiShoppingBag/></span>Handing Charge</h1>
-                <p className='text-red-500 font-semibold'> Rs. 100</p>
-                
-              </div> */}
+                 {promoDiscount > 0 && (
+  <div className="flex justify-between items-center">
+    <h1 className="flex gap-1 items-center text-green-600">
+      🎉 Discount
+    </h1>
+    <p className="text-green-600 font-semibold">- Rs. {promoDiscount}</p>
+  </div>
+)}
                   <hr className="text-gray-200 mt-2" />
                   <div className="flex justify-between items-center">
                     <h1 className="font-semibold text-lg">Total</h1>
@@ -148,6 +176,8 @@ const Cart = ({ location, getLocation }) => {
                     <p className="text-red-500  font-semibod mb-2">{promoCodeMessage}</p>
                     <div className="flex gap-3">
                       <input
+                        value={promoCode}
+                        onChange={(e)=>setPromoCode(e.target.value)}
                         type="text"
                         placeholder="Enter code"
                         className="p-2 rounded-md w-full"

@@ -3,10 +3,12 @@ import {  getData } from '../context/DataContext';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
+import { useNavigate } from 'react-router-dom';
+
 
 const Carousel = () => {
   const { fetchAllProducts, data } = getData();
-          
+     const navigate=useNavigate()     
 
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -108,7 +110,9 @@ const Carousel = () => {
                   {item.description}
                 </p>
 
-                <button className="bg-gradient-to-r from-red-500 to-purple-500 text-white px-3 py-2 rounded-md cursor-pointer mt-2">
+                <button className="bg-gradient-to-r from-red-500 to-purple-500 text-white px-3 py-2 rounded-md cursor-pointer mt-2"
+                onClick={()=>navigate("/products")}
+                >
                   Shop Now
                 </button>
               </div>
